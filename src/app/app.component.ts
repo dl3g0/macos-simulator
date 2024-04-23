@@ -34,7 +34,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   subscription: Subscription | undefined;
 
-  boot = false;
+  boot = true;
   wifiOn = false;
   bluetoothOn = false;
   airdropOn = false;
