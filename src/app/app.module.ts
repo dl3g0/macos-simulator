@@ -14,7 +14,6 @@ import { GlobalModule } from './modules/global/global.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    PrimengModule,
     GlobalModule,
     BrowserAnimationsModule
   ],

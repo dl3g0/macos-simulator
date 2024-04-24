@@ -1,0 +1,54 @@
+.boot{
+    background-color: black;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 22;
+    img {
+        display: block;
+        margin: auto;
+        opacity: 0;
+        transform: translateY(38vh);
+      
+        animation-name: boot-up;
+        animation-iteration-count: 1;
+        animation-duration: 8s;
+        animation-delay: 1s;
+      }
+}
+
+@keyframes boot-up {
+    0% {
+      opacity: 0;
+    }
+  
+    20% {
+      opacity: 1;
+    }
+  
+    80% {
+      opacity: 1;
+    }
+  
+    100% {
+      opacity: 0;
+    }
+  }
+  
+  @keyframes start {
+    0% {
+      opacity: 0;
+    }
+  
+    15% {
+      opacity: 1;
+    }
+  
+    85% {
+      opacity: 1;
+    }
+  
+    100% {
+      opacity: 0;
+    }
+  }

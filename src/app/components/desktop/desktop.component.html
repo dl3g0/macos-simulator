@@ -1,0 +1,154 @@
+<div class="main-container">
+    <p-menubar [model]="menubarItems" styleClass="menu-bar">
+        <ng-template pTemplate="start">
+            <i class="pi pi-apple"></i>
+        </ng-template>
+        <ng-template pTemplate="end">
+
+            <i class="pi pi-volume-up"></i>
+            <i class="pi pi-wifi"></i>
+            <i class="pi pi-search"></i>
+            <i class="pi pi-bars" (click)="op.toggle($event)"></i>
+            <span>Fri 13:07</span>
+        </ng-template>
+    </p-menubar>
+    <div class="dock-window dock-advanced">
+        <p-dock [model]="dockItems" position="bottom">
+            <ng-template pTemplate="item" let-item>
+                <img [src]="item.icon" [alt]="item.label" width="100%" />
+            </ng-template>
+        </p-dock>
+
+        <p-toast></p-toast>
+
+        <p-dialog [(visible)]="displayFinder" [breakpoints]="{ '960px': '50vw' }"
+            [style]="{ width: '30vw', height: '18rem' }" [draggable]="false" [resizable]="true">
+            <p-tree [value]="nodes"></p-tree>
+        </p-dialog>
+
+        <p-dialog #terminal [(visible)]="displayTerminal" [breakpoints]="{ '960px': '50vw' }"
+            [style]="{ width: '30vw', minWidth: '30vw', minHeight: '500px' }" [closable]="false" [draggable]="true"
+            [resizable]="true">
+            <ng-template pTemplate="header">
+                <div class="inline-flex align-items-center justify-content-center gap-2">
+                    <i class="fas fa-circle close" (click)="displayTerminal = false;"></i>
+                    <i class="fas fa-circle maximize" (click)="displayTerminal = false;"></i>
+                    <i class="fas fa-circle minimize" (click)="terminal.maximize()"></i>
+                </div>
+            </ng-template>
+            <p-terminal welcomeMessage="Welcome to PrimeNG (cmd: 'date', 'greet {0}', 'random')"
+                prompt="primeng $"></p-terminal>
+        </p-dialog>
+
+        
+    </div>
+</div>
+
+<p-menu #menu [model]="itemsMenuAntiClick" [popup]="true" [style]="{ 'left.px': menuLeft, 'top.px': menuTop }" ></p-menu>
+
+@if(displaySafari){
+  <app-safari (close)="displaySafari = false;"></app-safari>  
+}
+
+
+<p-overlayPanel #op>
+    <div class="grid m-0 overlay-config">
+        <div class="col-6">
+            <div class="grid glass-container">
+                <div class="col-12 flex align-items-center">
+                    <div [ngClass]="{'icon-on': wifiOn, 'icon-off': !wifiOn}" (click)="wifiOn = !wifiOn">
+                        <i class="pi pi-wifi"></i>
+                    </div>
+                    <div class="ml-3">
+                        <h4 class="m-0">Wifi</h4>
+                        @if(wifiOn){
+                        <span class="text-sm">Autonoma</span>
+                        }@else {
+                        <span class="text-sm">Desactivado</span>
+                        }
+                    </div>
+                </div>
+                <div class="col-12 flex align-items-center">
+                    <div [ngClass]="{'icon-on': bluetoothOn, 'icon-off': !bluetoothOn}"
+                        (click)="bluetoothOn = !bluetoothOn ">
+                        <i class="fab fa-bluetooth-b"></i>
+                    </div>
+                    <div class="ml-3">
+                        <h4 class="m-0">Bluetooth</h4>
+                        @if(bluetoothOn){
+                        <span class="text-sm">Activado</span>
+                        }@else {
+                        <span class="text-sm">Apagado</span>
+                        }
+
+                    </div>
+                </div>
+                <div class="col-12 flex align-items-center">
+                    <div [ngClass]="{'icon-on': airdropOn, 'icon-off': !airdropOn}" (click)="airdropOn = !airdropOn">
+                        <i class="fas fa-satellite-dish"></i>
+                    </div>
+                    <div class="ml-3">
+                        <h4 class="m-0">AirDrop</h4>
+                        @if(airdropOn){
+                        <span class="text-sm">Todos</span>
+                        }@else {
+                        <span class="text-sm">Nadie</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 pt-0">
+            <div class="grid m-0">
+                <div class="col-12 flex align-items-center glass-container pt-2 focusing">
+                    <div [ngClass]="{'icon-on': focusingOn, 'icon-off': !focusingOn}"
+                        (click)="focusingOn = !focusingOn">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <div class="ml-3">
+                        <h4 class="m-0">Enfoque</h4>
+                    </div>
+                </div>
+                <div class="col-12 p-0">
+                    <div class="grid m-0">
+                        <div class="col-6 pb-0 pl-0 pr-1 text-center ">
+                            <div
+                                class="glass-container flex align-items-center justify-content-center flex-column visual-organizer">
+                                <i class="fas fa-th-large text-lg my-2"></i>
+                                <div class="text-sm">Organizador visual</div>
+                            </div>
+                        </div>
+                        <div class="col-6 pb-0 pr-0 pl-1 text-center ">
+                            <div
+                                class="glass-container flex align-items-center justify-content-center flex-column mirror-screen">
+                                <i class="far fa-clone text-lg my-2"></i>
+                                <div class="text-sm">Duplicar pantalla</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="grid glass-container">
+                <div class="col-12 py-0">
+                    <b>Pantalla</b>
+                </div>
+                <div class="col-12 flex align-items-center relative">
+                    <p-slider [min]="10" [max]="100" class="w-full" [style]="{'width': '100%'}"
+                        [(ngModel)]="valueScreen" (onChange)="setValueScreen()"></p-slider>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 pb-0">
+            <div class="grid glass-container">
+                <div class="col-12 py-0">
+                    <b>Sonido</b>
+                </div>
+                <div class="col-12 flex align-items-center">
+                    <p-slider class="w-full" [style]="{'width': '100%'}" [(ngModel)]="valueSound"></p-slider>
+                </div>
+            </div>
+        </div>
+    </div>
+</p-overlayPanel>
