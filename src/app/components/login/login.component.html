@@ -1,3 +1,18 @@
-<div class="container-login">
-
+<div class="container-login flex align-items-center justify-content-center">
+    <div class="overflow-hidden">
+        <div class="flex align-items-center justify-content-center gap-5 ">
+            <p-carousel [value]="listUser" [numVisible]="3" [numScroll]="3" [circular]="false" [showIndicators]="false">
+                <ng-template let-item pTemplate="item">
+                    <div class="flex flex-column align-items-center">
+                        <div class="image-login relative mb-4 cursor-pointer">
+                            <img src="{{item.avatar}}" alt="" srcset="">
+                        </div>
+                        <span class="name-user-login white-space-nowrap overflow-hidden text-overflow-ellipsis cursor-pointer">
+                            {{item.name}}
+                        </span>
+                    </div>
+                </ng-template>
+            </p-carousel>
+        </div>
+    </div>
 </div>

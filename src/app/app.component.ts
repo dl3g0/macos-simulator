@@ -5,8 +5,8 @@ import { Component, OnInit} from '@angular/core';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit{
-  boot = true;
-  login = false;
+  boot = false;
+  login = true;
 
   ngOnInit(): void {
     setTimeout(() => {

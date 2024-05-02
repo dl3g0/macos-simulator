@@ -1,8 +1,27 @@
-.container-login{
-    height: 100vh;
-    width: 100vw;
-    background: url("../../../assets/background/light/ventura-light.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin: 0;
+.container-login {
+  height: 100vh;
+  width: 100vw;
+  background: url("../../../assets/background/light/ventura-light.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0;
+  .image-login{
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    border-radius: 50%;
+    img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
   }
+  .name-user-login{
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    font-size: 25px;
+    width: 200px;
+  }
+}
