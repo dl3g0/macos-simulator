@@ -1,18 +1,71 @@
+
+<div class="absolute loging w-full">
+    <p-menubar [model]="menubarItems" styleClass="menu-bar">
+        <ng-template pTemplate="end">
+
+            <i class="pi pi-volume-up"></i>
+            <i class="pi pi-wifi"></i>
+            <i class="pi pi-search"></i>
+            <i class="pi pi-bars"></i>
+            <span>Fri 13:07</span>
+        </ng-template>
+    </p-menubar>
+</div>
 <div class="container-login flex align-items-center justify-content-center">
+    
     <div class="overflow-hidden">
-        <div class="flex align-items-center justify-content-center gap-5 ">
-            <p-carousel [value]="listUser" [numVisible]="3" [numScroll]="3" [circular]="false" [showIndicators]="false">
-                <ng-template let-item pTemplate="item">
-                    <div class="flex flex-column align-items-center">
-                        <div class="image-login relative mb-4 cursor-pointer">
-                            <img src="{{item.avatar}}" alt="" srcset="">
+        @if(!selectedUser){
+            <div class="flex align-items-center justify-content-center gap-5 ">
+                <p-carousel [value]="listUser" [numVisible]="3" [numScroll]="3" [circular]="false" [showIndicators]="false">
+                    <ng-template let-item pTemplate="item">
+                        <div class="flex flex-column align-items-center" (click)="selectedUser = item">
+                            <div class="image-login relative mb-4 cursor-pointer mx-4">
+                                <img src="{{item.avatar}}" alt="" srcset="">
+                            </div>
+                            <span class="name-user-login white-space-nowrap overflow-hidden text-overflow-ellipsis cursor-pointer">
+                                {{item.name}}
+                            </span>
                         </div>
-                        <span class="name-user-login white-space-nowrap overflow-hidden text-overflow-ellipsis cursor-pointer">
-                            {{item.name}}
-                        </span>
-                    </div>
-                </ng-template>
-            </p-carousel>
+                    </ng-template>
+                </p-carousel>
+            </div>
+        }@else {
+            <div class="flex align-items-center justify-content-center gap-5 ">
+                        <div class="flex flex-column align-items-center">
+                            <div class="image-login relative mb-4 cursor-pointer mx-4">
+                                <img src="{{selectedUser.avatar}}" alt="" srcset="">
+                            </div>
+                            <span class="name-user-login white-space-nowrap overflow-hidden text-overflow-ellipsis cursor-pointer mb-4">
+                                {{selectedUser.name}}
+                            </span>
+
+                            <div class="p-2 flex">
+                                <p-password [(ngModel)]="password" [feedback]="false" placeholder="Ingresar contraseña" /> 
+                                <div class="login-button flex align-items-ceter justify-content-center" (click)="login()">
+                                    <i class="fas fa-arrow-right flex align-items-center"></i>
+                                </div>
+                            </div>
+                        </div>
+            </div>
+        }
+    </div>
+    <div class="bar-options">
+        <div class="grid m-0">
+            <div class="col-4">
+                <div class="buttons-options flex align-items-ceter justify-content-center">
+                    <i class="fas fa-power-off flex align-items-center"></i>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="buttons-options flex align-items-ceter justify-content-center">
+                    <i class="fas fa-sync flex align-items-center"></i>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="buttons-options flex align-items-ceter justify-content-center">
+                    <i class="fas fa-moon flex align-items-center"></i>
+                </div>
+            </div>
         </div>
     </div>
 </div>
