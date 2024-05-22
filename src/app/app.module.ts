@@ -15,7 +15,8 @@ import { GlobalModule } from './modules/global/global.module';
     BrowserModule,
     AppRoutingModule,
     GlobalModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    PrimengModule
   ],
   providers: [],
   bootstrap: [AppComponent]

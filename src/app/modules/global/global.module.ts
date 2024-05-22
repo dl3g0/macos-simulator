@@ -7,6 +7,8 @@ import { PrimengModule } from '../primeng/primeng.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SafariComponent } from '../../components/apps/safari/safari.component';
 import { TerminalComponent } from '../../components/apps/terminal/terminal.component';
+import { NotifyComponent } from '../../components/system-ui/notify/notify.component';
+import { VsCodeComponent } from '../../components/apps/vs-code/vs-code.component';
 
 
 
@@ -18,7 +20,9 @@ import { TerminalComponent } from '../../components/apps/terminal/terminal.compo
     DesktopComponent,
     //APLICACIONES
     SafariComponent,
-    TerminalComponent
+    TerminalComponent,
+    NotifyComponent,
+    VsCodeComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +36,9 @@ import { TerminalComponent } from '../../components/apps/terminal/terminal.compo
     FormsModule,
     //APLICACIONES
     SafariComponent,
-    TerminalComponent
+    TerminalComponent,
+    NotifyComponent,
+    VsCodeComponent
   ]
 })
 export class GlobalModule { }

@@ -1,9 +1,15 @@
 @if (boot) {
     <app-boot></app-boot>
 }@else {
-@if(login){
-    <app-login></app-login>
-}@else {
-    <app-desktop></app-desktop>
+    @if(login){
+        <app-login></app-login>
+    }@else {
+        <app-desktop></app-desktop>
+    }
 }
-}
+
+<p-toast [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"></p-toast>
+
+<div class="notifications">
+    <app-notify></app-notify> 
+ </div>

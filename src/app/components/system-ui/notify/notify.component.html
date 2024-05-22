@@ -1,0 +1,28 @@
+<div class="notifications ">
+	<ng-container *ngFor="let notification of notifications">
+		<div [id]="notification['id']" class="notification shadow-6 animate__animated animate__bounceInRight">
+			<ng-container *ngTemplateOutlet="notificationTpl;context:{notification:notification}"></ng-container>
+		</div>
+	</ng-container>
+</div>
+
+<ng-template #notificationTpl let-notification="notification">
+	<div class="container-notify cursor-pointer">
+		<div class="image-description mb-2">
+			@switch (notification.app) {
+				@case("SYSTEM"){
+					<div class="flex align-items-center" style="width: calc(100% - 60px);">
+						<img style="height: 20px;" src="assets/icons/settings.webp" alt="" srcset="">
+						<span class="font-bold ml-2">{{notification.title}}</span>
+					</div>
+					
+				}
+			}
+			<span class="text-sm" style="width: 60px;">{{notification.date | date:'h:mm a'}}</span>
+		</div>
+		<div class="container-message">
+			<div class="title" translate>{{notification.subTitle}}</div>
+		</div>
+		<i class="fas fa-times cursor-pointer" (click)="close(notification)"></i>
+	</div>
+</ng-template>

@@ -1,0 +1,18 @@
+.notifications {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 214748364;
+  width: 400px;
+}
+
+@media only screen and (max-width: 768px) {
+  .notifications {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 214748364;
+    width: 100%;
+    max-width: 400px;
+  }
+}

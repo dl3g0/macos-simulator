@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { GlobalService } from '../../services/global.service';
+import * as uuid from 'uuid';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -34,8 +35,18 @@ export class LoginComponent {
 
   login(){
     if(this.password === this.selectedUser.password){
-      console.log("ingresa")
       this.globalService.sendRequest({ type: 'LOGIN', status: false });
+    }else{
+      // this.globalService.sendRequest({ severity: 'error', summary: 'Error', detail: "Contraseña incorrecta", type: 'TOAST', });
+
+        this.globalService.sendRequest({ 
+        id: uuid.v4(), 
+        app: "SYSTEM",
+        title: "Sistema",
+        subTitle: "Error en contraseña",
+        date: new Date(),
+        timeout: 0,
+        type: 'NOTIFY_SYSTEM'});
     }
   }
 }

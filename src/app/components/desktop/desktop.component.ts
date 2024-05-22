@@ -58,6 +58,7 @@ export class DesktopComponent implements OnInit, OnDestroy{
   menuLeft: number = 0;
   menuTop: number = 0;
   displaySafari = false;
+  displayVscode = false;
   constructor(
     private messageService: MessageService,
     private terminalService: TerminalService
@@ -80,7 +81,7 @@ export class DesktopComponent implements OnInit, OnDestroy{
         },
         icon: 'https://primefaces.org/cdn/primeng/images/dock/finder.svg',
         command: () => {
-          this.displayFinder = true;
+          // this.displayFinder = true;
         },
       },
       {
@@ -98,6 +99,20 @@ export class DesktopComponent implements OnInit, OnDestroy{
         },
       },
       {
+        label: 'VS code',
+        tooltipOptions: {
+          tooltipLabel: 'Terminal',
+          tooltipPosition: 'top',
+          positionTop: -15,
+          positionLeft: 15,
+          showDelay: 1000,
+        },
+        icon: 'https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_vscode_icon_130084.png',
+        command: () => {
+          this.displayVscode = true;
+        },
+      },
+      {
         label: 'App Store',
         tooltipOptions: {
           tooltipLabel: 'App Store',
@@ -108,11 +123,11 @@ export class DesktopComponent implements OnInit, OnDestroy{
         },
         icon: 'https://primefaces.org/cdn/primeng/images/dock/appstore.svg',
         command: () => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'An unexpected error occurred while signing in.',
-            detail: 'UNTRUSTED_CERT_TITLE',
-          });
+          // this.messageService.add({
+          //   severity: 'error',
+          //   summary: 'An unexpected error occurred while signing in.',
+          //   detail: 'UNTRUSTED_CERT_TITLE',
+          // });
         },
       },
       {
@@ -140,7 +155,7 @@ export class DesktopComponent implements OnInit, OnDestroy{
         },
         icon: 'https://primefaces.org/cdn/primeng/images/dock/photos.svg',
         command: () => {
-          this.displayGalleria = true;
+          // this.displayGalleria = true;
         },
       },
       {
@@ -165,7 +180,7 @@ export class DesktopComponent implements OnInit, OnDestroy{
         },
         icon: 'https://primefaces.org/cdn/primeng/images/dock/trash.png',
         command: () => {
-          this.messageService.add({ severity: 'info', summary: 'Empty Trash' });
+          // this.messageService.add({ severity: 'info', summary: 'Empty Trash' });
         },
       },
     ];

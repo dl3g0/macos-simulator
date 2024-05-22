@@ -38,6 +38,10 @@
     <app-terminal (close)="displayTerminal = false;"></app-terminal>
 }
 
+@if(displayVscode){
+    <app-vs-code (close)="displayVscode = false;"></app-vs-code>
+}
+
 <p-overlayPanel #op>
     <div class="grid m-0 overlay-config">
         <div class="col-6">
