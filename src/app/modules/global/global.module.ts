@@ -9,6 +9,8 @@ import { SafariComponent } from '../../components/apps/safari/safari.component';
 import { TerminalComponent } from '../../components/apps/terminal/terminal.component';
 import { NotifyComponent } from '../../components/system-ui/notify/notify.component';
 import { VsCodeComponent } from '../../components/apps/vs-code/vs-code.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { TaskManagerComponent } from '../../components/apps/task-manager/task-manager.component';
 
 
 
@@ -22,11 +24,13 @@ import { VsCodeComponent } from '../../components/apps/vs-code/vs-code.component
     SafariComponent,
     TerminalComponent,
     NotifyComponent,
-    VsCodeComponent
+    VsCodeComponent,
+    TaskManagerComponent
   ],
   imports: [
     CommonModule,
-    PrimengModule
+    PrimengModule,
+    NgApexchartsModule
   ],
   exports:[
     BootComponent,
@@ -38,7 +42,9 @@ import { VsCodeComponent } from '../../components/apps/vs-code/vs-code.component
     SafariComponent,
     TerminalComponent,
     NotifyComponent,
-    VsCodeComponent
+    VsCodeComponent,
+    NgApexchartsModule,
+    TaskManagerComponent
   ]
 })
 export class GlobalModule { }

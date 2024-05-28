@@ -70,6 +70,8 @@ import {SplitButtonModule} from 'primeng/splitbutton';
 import {TimelineModule} from 'primeng/timeline';
 import { DockModule } from 'primeng/dock';
 import { TerminalModule } from 'primeng/terminal';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 @NgModule({
   declarations: [],
   imports: [
@@ -143,7 +145,9 @@ import { TerminalModule } from 'primeng/terminal';
     FileUploadModule,
     DataViewModule,
     SplitButtonModule,
-    TimelineModule
+    TimelineModule,
+    InputGroupModule,
+    InputGroupAddonModule
   ],
   exports:[
     TerminalModule,
@@ -216,7 +220,9 @@ import { TerminalModule } from 'primeng/terminal';
     FileUploadModule,
     DataViewModule,
     SplitButtonModule,
-    TimelineModule
+    TimelineModule,
+    InputGroupModule,
+    InputGroupAddonModule
   ]
 })
 export class PrimengModule { }

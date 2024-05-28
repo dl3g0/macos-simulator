@@ -46,19 +46,27 @@ export class DesktopComponent implements OnInit, OnDestroy{
 
   itemsMenuAntiClick = [
     {
-      label: 'Ordenar por'
-    },
-    {
       label: 'Nueva carpeta'
     },
     {
       label: 'Vaciar papelera'
+    },
+    {
+      label: 'Cambiar fondo de escritorio'
+    },
+    {
+      label: 'Administrador de tareas',
+      command: () => {
+        this.displayTask = true;
+      }
     }
   ];
   menuLeft: number = 0;
   menuTop: number = 0;
   displaySafari = false;
   displayVscode = false;
+
+  displayTask = true;
   constructor(
     private messageService: MessageService,
     private terminalService: TerminalService
@@ -79,7 +87,7 @@ export class DesktopComponent implements OnInit, OnDestroy{
           positionLeft: 15,
           showDelay: 1000,
         },
-        icon: 'https://primefaces.org/cdn/primeng/images/dock/finder.svg',
+        icon: 'assets/icons/finder.svg',
         command: () => {
           // this.displayFinder = true;
         },
@@ -93,7 +101,7 @@ export class DesktopComponent implements OnInit, OnDestroy{
           positionLeft: 15,
           showDelay: 1000,
         },
-        icon: 'https://primefaces.org/cdn/primeng/images/dock/terminal.svg',
+        icon: 'assets/icons/terminal.svg',
         command: () => {
           this.displayTerminal = true;
         },
@@ -107,7 +115,7 @@ export class DesktopComponent implements OnInit, OnDestroy{
           positionLeft: 15,
           showDelay: 1000,
         },
-        icon: 'https://cdn.icon-icons.com/icons2/2107/PNG/512/file_type_vscode_icon_130084.png',
+        icon: 'assets/icons/vscode.png',
         command: () => {
           this.displayVscode = true;
         },
@@ -121,7 +129,7 @@ export class DesktopComponent implements OnInit, OnDestroy{
           positionLeft: 15,
           showDelay: 1000,
         },
-        icon: 'https://primefaces.org/cdn/primeng/images/dock/appstore.svg',
+        icon: 'assets/icons/appstore.svg',
         command: () => {
           // this.messageService.add({
           //   severity: 'error',
@@ -139,7 +147,7 @@ export class DesktopComponent implements OnInit, OnDestroy{
           positionLeft: 15,
           showDelay: 1000,
         },
-        icon: 'https://primefaces.org/cdn/primeng/images/dock/safari.svg',
+        icon: 'assets/icons/safari.svg',
         command: () => {
           this.displaySafari = true;
         },
@@ -153,7 +161,7 @@ export class DesktopComponent implements OnInit, OnDestroy{
           positionLeft: 15,
           showDelay: 1000,
         },
-        icon: 'https://primefaces.org/cdn/primeng/images/dock/photos.svg',
+        icon: 'assets/icons/photos.svg',
         command: () => {
           // this.displayGalleria = true;
         },
@@ -167,7 +175,7 @@ export class DesktopComponent implements OnInit, OnDestroy{
           positionLeft: 15,
           showDelay: 1000,
         },
-        icon: 'https://primefaces.org/cdn/primeng/images/dock/github.svg',
+        icon: 'assets/icons/github.svg',
       },
       {
         label: 'Trash',
@@ -178,7 +186,7 @@ export class DesktopComponent implements OnInit, OnDestroy{
           positionLeft: 15,
           showDelay: 1000,
         },
-        icon: 'https://primefaces.org/cdn/primeng/images/dock/trash.png',
+        icon: 'assets/icons/trash.png',
         command: () => {
           // this.messageService.add({ severity: 'info', summary: 'Empty Trash' });
         },
@@ -337,13 +345,15 @@ export class DesktopComponent implements OnInit, OnDestroy{
 
   @HostListener('document:contextmenu', ['$event'])
   onContextMenu(event: MouseEvent) {
-    event.preventDefault(); // Previene que aparezca el menú predeterminado del navegador
-    this.menuLeft = event.clientX;
-    this.menuTop = event.clientY;
-    this.menu.hide();
-    setTimeout(() => {
-        this.menu.show(event);
-    }, 100);
+    if(event){
+      event.preventDefault(); // Previene que aparezca el menú predeterminado del navegador
+      this.menuLeft = event.clientX;
+      this.menuTop = event.clientY;
+      this.menu.hide();
+      setTimeout(() => {
+          this.menu.show(event);
+      }, 100);
+    }
   }
 
   @HostListener('document:click', ['$event'])

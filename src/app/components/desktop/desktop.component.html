@@ -28,7 +28,7 @@
     </div>
 </div>
 
-<p-menu #menu [model]="itemsMenuAntiClick" [popup]="true" [style]="{ 'left.px': menuLeft, 'top.px': menuTop }" ></p-menu>
+<p-menu styleClass="menu-global" #menu [model]="itemsMenuAntiClick" [popup]="true" [style]="{ 'left.px': menuLeft, 'top.px': menuTop }" ></p-menu>
 
 @if(displaySafari){
   <app-safari (close)="displaySafari = false;"></app-safari>  
@@ -40,6 +40,10 @@
 
 @if(displayVscode){
     <app-vs-code (close)="displayVscode = false;"></app-vs-code>
+}
+
+@if(displayTask){
+    <app-task-manager (close)="displayTask = false;"></app-task-manager>
 }
 
 <p-overlayPanel #op>
