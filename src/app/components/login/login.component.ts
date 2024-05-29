@@ -15,14 +15,14 @@ export class LoginComponent {
     },
     {
       avatar: "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg",
-      name: "Daniel Carguas",
+      name: "Daniel Carhuas Carranza",
       password: "1234567"
-    },
-    {
-      avatar: "https://www.shutterstock.com/image-photo/woman-face-profile-side-view-600nw-1937688637.jpg",
-      name: "Estefany",
-      password: "12345678"
     }
+    // {
+    //   avatar: "https://www.shutterstock.com/image-photo/woman-face-profile-side-view-600nw-1937688637.jpg",
+    //   name: "Estefany",
+    //   password: "12345678"
+    // }
   ];
  
   selectedUser = null;

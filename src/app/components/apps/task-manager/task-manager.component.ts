@@ -108,10 +108,10 @@ export class TaskManagerComponent implements OnInit{
     const maxDataPoints = 10; // Define el máximo número de puntos de datos a mostrar
 
     // Añade nuevos datos
-    updatedCPUData.push({ x: newTime, y: Math.floor(Math.random() * 100) + 1 });
-    updatedGPUData.push({ x: newTime, y: Math.floor(Math.random() * 100) + 1 });
-    updatedDISKData.push({ x: newTime, y: Math.floor(Math.random() * 100) + 1 });
-    updatedMEMORIData.push({ x: newTime, y: Math.floor(Math.random() * 100) + 1 });
+    updatedCPUData.push({ x: newTime, y: Math.floor(Math.random() * 10) + 1 });
+    updatedGPUData.push({ x: newTime, y: Math.floor(Math.random() * 50) + 1 });
+    updatedDISKData.push({ x: newTime, y: Math.floor(Math.random() * 50) + 1 });
+    updatedMEMORIData.push({ x: newTime, y: Math.floor(Math.random() * 50) + 1 });
     // Elimina los puntos de datos más antiguos si se supera el límite
     if (updatedCPUData.length > maxDataPoints) {
       updatedCPUData.shift();
@@ -134,15 +134,5 @@ export class TaskManagerComponent implements OnInit{
     ];
 
     console.log(this.chartProccess)
-  }
-
-  generateSeries(baseval) {
-    const series = [];
-    for (let i = 0; i < 10; i++) {
-      const x = baseval + 3000;
-      const y = Math.floor(Math.random() * (100 - 0 + 1)) + 0;
-      series.push({ x: x, y: y });
-    }
-    return series;
   }
 }
