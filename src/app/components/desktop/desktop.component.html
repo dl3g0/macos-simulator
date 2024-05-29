@@ -4,9 +4,23 @@
             <i class="pi pi-apple"></i>
         </ng-template>
         <ng-template pTemplate="end">
-
-            <i class="pi pi-volume-up"></i>
-            <i class="pi pi-wifi"></i>
+            @if(valueSound >=50){
+                <i class="fas fa-volume-up"></i>
+            }@else if(valueSound < 50 && valueSound >= 30){
+                <i class="fas fa-volume-down"></i>
+            }@else{
+                <i class="fas fa-volume-off"></i>
+            }
+            
+            @if(wifiOn){
+              <i class="pi pi-wifi"></i>  
+            }
+            @if(bluetoothOn){
+                <i class="fab fa-bluetooth-b"></i>  
+            }
+            @if(airdropOn){
+                <i class="fas fa-satellite-dish"></i>
+            }
             <i class="pi pi-search"></i>
             <i class="pi pi-bars" (click)="op.toggle($event)"></i>
             <span>Fri 13:07</span>
@@ -135,13 +149,28 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 pb-0">
+        <div class="col-12">
             <div class="grid glass-container">
                 <div class="col-12 py-0">
                     <b>Sonido</b>
                 </div>
                 <div class="col-12 flex align-items-center">
                     <p-slider class="w-full" [style]="{'width': '100%'}" [(ngModel)]="valueSound"></p-slider>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 pb-0">
+            <div class="grid glass-container">
+                <div style="width: 50px; height: 50px;">
+                    <img style="border-radius: 50%;" class="w-full h-full" src="https://i.scdn.co/image/ab67616d0000b273f1aad814a40ec7419c234242" alt="" srcset="">
+                </div>
+                <div class="col">
+                    <div>
+                        <b class="text-lg">LUNA</b>
+                    </div>
+                    <div class="text-sm">
+                        FERXXO
+                    </div>
                 </div>
             </div>
         </div>

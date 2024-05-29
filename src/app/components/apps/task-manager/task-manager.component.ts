@@ -9,6 +9,15 @@ export class TaskManagerComponent implements OnInit{
   displayTask = true;
   tab = 'PROCESSES';
   chartProccess = null;
+  value = [];
+
+  cols = [
+    { field: 'Nombre', header: 'Nombre' },
+    { field: 'Memoria', header: 'Memoria' },
+    { field: 'CPU', header: 'CPU' },
+    { field: 'GPU', header: 'GPU' },
+    { field: 'Disco', header: 'Disco' }
+  ];
   @Output() close = new EventEmitter<Object>();
 
   closeDialog(){
@@ -57,6 +66,10 @@ export class TaskManagerComponent implements OnInit{
         {
           name: 'DISCO',
           data: []
+        },
+        {
+          name: 'MEMORIA',
+          data: []
         }
       ],
       stroke: {
@@ -91,14 +104,14 @@ export class TaskManagerComponent implements OnInit{
     const updatedCPUData = this.chartProccess.series[0].data;
     const updatedGPUData = this.chartProccess.series[1].data;
     const updatedDISKData = this.chartProccess.series[2].data;
-
+    const updatedMEMORIData = this.chartProccess.series[3].data;
     const maxDataPoints = 10; // Define el máximo número de puntos de datos a mostrar
 
     // Añade nuevos datos
     updatedCPUData.push({ x: newTime, y: Math.floor(Math.random() * 100) + 1 });
     updatedGPUData.push({ x: newTime, y: Math.floor(Math.random() * 100) + 1 });
     updatedDISKData.push({ x: newTime, y: Math.floor(Math.random() * 100) + 1 });
-
+    updatedMEMORIData.push({ x: newTime, y: Math.floor(Math.random() * 100) + 1 });
     // Elimina los puntos de datos más antiguos si se supera el límite
     if (updatedCPUData.length > maxDataPoints) {
       updatedCPUData.shift();
@@ -109,30 +122,24 @@ export class TaskManagerComponent implements OnInit{
     if (updatedDISKData.length > maxDataPoints) {
       updatedDISKData.shift();
     }
+    if (updatedMEMORIData.length > maxDataPoints) {
+      updatedMEMORIData.shift();
+    }
 
     this.chartProccess.series = [
       { name: 'CPU', data: updatedCPUData },
       { name: 'GPU', data: updatedGPUData },
-      { name: 'DISCO', data: updatedDISKData }
+      { name: 'DISCO', data: updatedDISKData },
+      { name: 'MEMORIA', data: updatedMEMORIData }
     ];
-  }
 
-  generateCPU(baseval) {
-    return this.generateSeries(baseval);
-  }
-
-  generateGPU(baseval) {
-    return this.generateSeries(baseval);
-  }
-
-  generateDISK(baseval) {
-    return this.generateSeries(baseval);
+    console.log(this.chartProccess)
   }
 
   generateSeries(baseval) {
     const series = [];
     for (let i = 0; i < 10; i++) {
-      const x = baseval + i * 3000;
+      const x = baseval + 3000;
       const y = Math.floor(Math.random() * (100 - 0 + 1)) + 0;
       series.push({ x: x, y: y });
     }

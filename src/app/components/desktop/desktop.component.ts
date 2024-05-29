@@ -66,7 +66,15 @@ export class DesktopComponent implements OnInit, OnDestroy{
   displaySafari = false;
   displayVscode = false;
 
-  displayTask = true;
+  displayTask = false;
+
+  listMusic = [
+    {
+      url: "assets/music/LUNA.mp3",
+      name: "LUNA",
+      artist: "FERXXO",
+    }
+  ];
   constructor(
     private messageService: MessageService,
     private terminalService: TerminalService
