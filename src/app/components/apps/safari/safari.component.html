@@ -6,5 +6,9 @@
             <i class="fas fa-circle minimize" (click)="safari.maximize()"></i>
         </div>
     </ng-template>
-    <iframe style="height: 100%; width: 100%; min-height: 500px;" src="https://www.bing.com/?setlang=es" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+    @if(wifiOn){
+        <iframe style="height: 100%; width: 100%; min-height: 500px;" src="https://www.bing.com/?setlang=es" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+    }@else {
+        <app-no-network></app-no-network> 
+    }
 </p-dialog>

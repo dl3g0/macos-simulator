@@ -8,7 +8,7 @@ import {
 import { MenuItem, MessageService } from 'primeng/api';
 import { TerminalService } from 'primeng/terminal';
 import { Subscription } from 'rxjs';
-
+import { GlobalService } from '../../services/global.service';
 @Component({
   selector: 'app-desktop',
   templateUrl: './desktop.component.html',
@@ -36,12 +36,12 @@ export class DesktopComponent implements OnInit, OnDestroy{
   subscription: Subscription | undefined;
 
   boot = true;
-  wifiOn = true;
+  wifiOn = false;
   bluetoothOn = false;
   airdropOn = false;
   valueScreen = 99;
   valueSound = 50;
-  login = false;
+  login = true;
   focusingOn = false;
 
   itemsMenuAntiClick = [
@@ -77,10 +77,14 @@ export class DesktopComponent implements OnInit, OnDestroy{
   ];
   constructor(
     private messageService: MessageService,
-    private terminalService: TerminalService
-  ) {}
+    private terminalService: TerminalService,
+    private globalService: GlobalService
+  ) {
+
+  }
 
   ngOnInit() {
+    this.wifi();
     this.setValueScreen();
     setTimeout(() => {
       this.boot = false;
@@ -405,5 +409,10 @@ export class DesktopComponent implements OnInit, OnDestroy{
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  wifi(){
+    this.wifiOn = !this.wifiOn;
+    this.globalService.sendRequest({ type: 'STATUS_WIFI', status: this.wifiOn });
   }
 }

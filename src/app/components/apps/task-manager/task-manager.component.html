@@ -23,7 +23,7 @@
                     [value]="value" 
                     [columns]="cols" 
                     [reorderableColumns]="true" 
-                    [tableStyle]="{'min-width': '50rem'}">
+                    [tableStyle]="{'min-width': '50rem'}" styleClass="table-task">
                         <ng-template pTemplate="header" let-columns>
                             <tr>
                                 <th style="width:3rem"></th>
@@ -80,7 +80,7 @@
                                     <td>
                                         <span class="pi pi-bars" pReorderableRowHandle></span>
                                     </td>
-                                    <td *ngFor="let col of columns">
+                                    <td *ngFor="let col of columns" class="text-center">
                                         {{rowData[col.field]}}
                                     </td>
                                 </tr>

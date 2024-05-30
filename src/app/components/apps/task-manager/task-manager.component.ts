@@ -1,27 +1,59 @@
-import { Component, Output, input, output, EventEmitter, OnInit } from '@angular/core';
+import {
+  Component,
+  Output,
+  input,
+  output,
+  EventEmitter,
+  OnInit,
+} from '@angular/core';
 
 @Component({
   selector: 'app-task-manager',
   templateUrl: './task-manager.component.html',
-  styleUrl: './task-manager.component.scss'
+  styleUrl: './task-manager.component.scss',
 })
-export class TaskManagerComponent implements OnInit{
+export class TaskManagerComponent implements OnInit {
   displayTask = true;
   tab = 'PROCESSES';
   chartProccess = null;
-  value = [];
+  value = [
+    {
+      id:"TASK_MANAGER",
+      name: "Administrador de tareas",
+      memory: 50,
+      cpu: 5,
+      gpu: 10,
+      disco: 0.5
+    },
+    {
+      id:"KERNEL_TASK",
+      name: "kernel task",
+      memory: 200,
+      cpu: 10,
+      gpu: 10,
+      disco: 0.5
+    },
+    {
+      id: "SYSTEM_UI_SERVER",
+      name: "SystemUIServer",
+      memory: 100,
+      cpu: 5,
+      gpu: 10,
+      disco: 0.5
+    }
+  ];
 
   cols = [
-    { field: 'Nombre', header: 'Nombre' },
-    { field: 'Memoria', header: 'Memoria' },
-    { field: 'CPU', header: 'CPU' },
-    { field: 'GPU', header: 'GPU' },
-    { field: 'Disco', header: 'Disco' }
+    { field: 'name', header: 'Nombre del proceso' },
+    { field: 'memory', header: 'Memoria' },
+    { field: 'cpu', header: 'CPU' },
+    { field: 'gpu', header: 'GPU' },
+    { field: 'disco', header: 'Disco' },
   ];
   @Output() close = new EventEmitter<Object>();
 
-  closeDialog(){
-    this.close.emit()
+  closeDialog() {
+    this.close.emit();
   }
 
   ngOnInit(): void {
@@ -32,7 +64,7 @@ export class TaskManagerComponent implements OnInit{
     }, 3000);
   }
 
- showGraphic() {
+  showGraphic() {
     this.chartProccess = {
       chart: {
         height: 350,
@@ -41,61 +73,61 @@ export class TaskManagerComponent implements OnInit{
           enabled: true,
           easing: 'linear',
           dynamicAnimation: {
-            speed: 1000
-          }
+            speed: 1000,
+          },
         },
         toolbar: {
-          show: false
+          show: false,
         },
         zoom: {
-          enabled: false
-        }
+          enabled: false,
+        },
       },
       dataLabels: {
-        enabled: false
+        enabled: false,
       },
       series: [
         {
           name: 'CPU',
-          data: []
+          data: [],
         },
         {
           name: 'GPU',
-          data: []
+          data: [],
         },
         {
           name: 'DISCO',
-          data: []
+          data: [],
         },
         {
           name: 'MEMORIA',
-          data: []
-        }
+          data: [],
+        },
       ],
       stroke: {
         curve: 'smooth',
-        width: 2
+        width: 2,
       },
       xaxis: {
-        type: 'datetime'
+        type: 'datetime',
       },
       yaxis: {
         min: 0,
-        max: 100
+        max: 100,
       },
       title: {
         text: 'Rendimiento',
         align: 'left',
         style: {
-          fontSize: '12px'
-        }
+          fontSize: '12px',
+        },
       },
       legend: {
         show: true,
         floating: false,
         horizontalAlign: 'center',
-        position: 'bottom'
-      }
+        position: 'bottom',
+      },
     };
   }
 
@@ -111,7 +143,10 @@ export class TaskManagerComponent implements OnInit{
     updatedCPUData.push({ x: newTime, y: Math.floor(Math.random() * 10) + 1 });
     updatedGPUData.push({ x: newTime, y: Math.floor(Math.random() * 50) + 1 });
     updatedDISKData.push({ x: newTime, y: Math.floor(Math.random() * 50) + 1 });
-    updatedMEMORIData.push({ x: newTime, y: Math.floor(Math.random() * 50) + 1 });
+    updatedMEMORIData.push({
+      x: newTime,
+      y: Math.floor(Math.random() * 50) + 1,
+    });
     // Elimina los puntos de datos más antiguos si se supera el límite
     if (updatedCPUData.length > maxDataPoints) {
       updatedCPUData.shift();
@@ -130,9 +165,9 @@ export class TaskManagerComponent implements OnInit{
       { name: 'CPU', data: updatedCPUData },
       { name: 'GPU', data: updatedGPUData },
       { name: 'DISCO', data: updatedDISKData },
-      { name: 'MEMORIA', data: updatedMEMORIData }
+      { name: 'MEMORIA', data: updatedMEMORIData },
     ];
 
-    console.log(this.chartProccess)
+    console.log(this.chartProccess);
   }
 }

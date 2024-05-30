@@ -11,6 +11,7 @@ import { NotifyComponent } from '../../components/system-ui/notify/notify.compon
 import { VsCodeComponent } from '../../components/apps/vs-code/vs-code.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { TaskManagerComponent } from '../../components/apps/task-manager/task-manager.component';
+import { NoNetworkComponent } from '../../components/apps/safari/no-network/no-network.component';
 
 
 
@@ -25,7 +26,8 @@ import { TaskManagerComponent } from '../../components/apps/task-manager/task-ma
     TerminalComponent,
     NotifyComponent,
     VsCodeComponent,
-    TaskManagerComponent
+    TaskManagerComponent,
+    NoNetworkComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +46,8 @@ import { TaskManagerComponent } from '../../components/apps/task-manager/task-ma
     NotifyComponent,
     VsCodeComponent,
     NgApexchartsModule,
-    TaskManagerComponent
+    TaskManagerComponent,
+    NoNetworkComponent
   ]
 })
 export class GlobalModule { }

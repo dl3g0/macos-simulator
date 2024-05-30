@@ -26,7 +26,7 @@
   overflow: hidden;
   span{
     width: 120px;
-    height: 50px;
+    height: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,4 +38,8 @@
 
 .selected-tab{
   background: rgb(255 255 255 / 80%)!important;
+}
+
+::ng-depp .table-task .p-datatable .p-datatable-tbody > tr > td{
+  text-align: center;
 }
