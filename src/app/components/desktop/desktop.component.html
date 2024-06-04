@@ -1,4 +1,4 @@
-<div class="main-container">
+<div class="main-container" #container>
     <p-menubar [model]="menubarItems" styleClass="menu-bar">
         <ng-template pTemplate="start">
             <i class="pi pi-apple"></i>
@@ -109,13 +109,12 @@
         </div>
         <div class="col-6 pt-0">
             <div class="grid m-0">
-                <div class="col-12 flex align-items-center glass-container pt-2 focusing">
-                    <div [ngClass]="{'icon-on': focusingOn, 'icon-off': !focusingOn}"
-                        (click)="focusingOn = !focusingOn">
-                        <i class="fas fa-moon"></i>
+                <div class="col-12 flex align-items-center glass-container pt-2 focusing" (click)="option.toggle($event)">
+                    <div>
+                        <img style="width: 40px; height: 40px; border-radius: 50%;" src="{{user.avatar}}" alt="" srcset="">
                     </div>
                     <div class="ml-3">
-                        <h4 class="m-0">Enfoque</h4>
+                        <h4 class="m-0">{{user.name}}</h4>
                     </div>
                 </div>
                 <div class="col-12 p-0">
@@ -176,3 +175,5 @@
         </div>
     </div>
 </p-overlayPanel>
+
+<p-menu #option styleClass="menu-global" [model]="items" [popup]="true" />

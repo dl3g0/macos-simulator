@@ -45,27 +45,45 @@
                                     <i class="fas fa-arrow-right flex align-items-center"></i>
                                 </div>
                             </div>
+                            @if(statusPass && selectedUser && (password != selectedUser.password)){
+                                <div class="p-2 flex justify-content-center">
+                                    <span class="font-bold" style="color: var(--pink-500);">Contraseña incorrecta</span>
+                                </div>
+                            }
+                            
                         </div>
             </div>
         }
     </div>
     <div class="bar-options">
         <div class="grid m-0">
-            <div class="col-4">
-                <div class="buttons-options flex align-items-ceter justify-content-center">
-                    <i class="fas fa-power-off flex align-items-center"></i>
+            <div class="col">
+                <div class="buttons-options flex align-items-ceter justify-content-center" (click)="clickTurnOff()">
+                    <i class="fas fa-power-off flex align-items-center" pTooltip="Apagar" 
+                    tooltipPosition="top" ></i>
                 </div>
             </div>
-            <div class="col-4">
-                <div class="buttons-options flex align-items-ceter justify-content-center">
-                    <i class="fas fa-sync flex align-items-center"></i>
+            <div class="col">
+                <div class="buttons-options flex align-items-ceter justify-content-center" (click)="clickRestar()">
+                    <i class="fas fa-sync flex align-items-center" pTooltip="Reiniciar" 
+                    tooltipPosition="top" ></i>
                 </div>
             </div>
-            <div class="col-4">
-                <div class="buttons-options flex align-items-ceter justify-content-center">
-                    <i class="fas fa-moon flex align-items-center"></i>
+            <div class="col">
+                <div class="buttons-options flex align-items-ceter justify-content-center" (click)="clickSuspend()">
+                    <i class="fas fa-moon flex align-items-center" pTooltip="Suspender" 
+                    tooltipPosition="top" ></i>
                 </div>
             </div>
+            @if(selectedUser){
+                <div class="col">
+                    <div class="buttons-options flex align-items-ceter justify-content-center" (click)="selectedUser = null">
+                        <i class="fas fa-users flex align-items-center" pTooltip="Cambiar usuario" 
+                        tooltipPosition="top" ></i>
+                    </div>
+                </div>
+            }
+            
         </div>
     </div>
 </div>

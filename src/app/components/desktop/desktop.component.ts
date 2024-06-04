@@ -4,6 +4,8 @@ import {
   OnInit,
   ViewChild,
   HostListener,
+  Renderer2,
+  ElementRef
 } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
 import { TerminalService } from 'primeng/terminal';
@@ -46,7 +48,10 @@ export class DesktopComponent implements OnInit, OnDestroy{
 
   itemsMenuAntiClick = [
     {
-      label: 'Nueva carpeta'
+      label: 'Nueva carpeta',
+      command: () => {
+        this.createFolder();
+      }
     },
     {
       label: 'Vaciar papelera'
@@ -67,7 +72,8 @@ export class DesktopComponent implements OnInit, OnDestroy{
   displayVscode = false;
 
   displayTask = false;
-
+  positionX = null;
+  positionY = null;
   listMusic = [
     {
       url: "assets/music/LUNA.mp3",
@@ -75,12 +81,50 @@ export class DesktopComponent implements OnInit, OnDestroy{
       artist: "FERXXO",
     }
   ];
+  user = null;
+  items = [
+    {
+        label: 'Opciones',
+        items: [
+            {
+                label: 'Bloquear',
+                icon: 'fas fa-lock',
+                command: () => {
+                  this.globalService.sendRequest({ type: 'LOCK_SESION', user: this.user });
+                },
+            },
+            {
+                label: 'Cerrar sesión',
+                icon: 'fas fa-door-open',
+                command: () => {
+                  this.globalService.sendRequest({ type: 'CLOSE_SESION', user: null });
+                },
+            }
+        ]
+    }
+  ];
+  @ViewChild('container', { static: true }) container: ElementRef;
   constructor(
     private messageService: MessageService,
     private terminalService: TerminalService,
-    private globalService: GlobalService
+    private globalService: GlobalService,
+    private renderer: Renderer2
   ) {
+    this.user = JSON.parse(localStorage.getItem('user'))
+  }
 
+  createFolder(){
+    const newElement = this.renderer.createElement('img');
+    this.renderer.setAttribute(newElement, 'src', '/assets/icons/folder.png');
+    this.renderer.setStyle(newElement, 'position', 'absolute');
+    this.renderer.setStyle(newElement, 'top', `${this.positionY}px`);
+    this.renderer.setStyle(newElement, 'left', `${this.positionX}px`);
+    this.renderer.addClass(newElement, 'carpeta');
+
+    // Limpiar el contenedor y agregar el nuevo elemento
+    const containerElement = this.container.nativeElement;
+    // containerElement.innerHTML = ''; // Limpiar contenido previo
+    this.renderer.appendChild(containerElement, newElement);
   }
 
   ngOnInit() {
@@ -358,6 +402,8 @@ export class DesktopComponent implements OnInit, OnDestroy{
   @HostListener('document:contextmenu', ['$event'])
   onContextMenu(event: MouseEvent) {
     if(event){
+      this.positionX = event.clientX;
+      this.positionY= event.clientY;
       event.preventDefault(); // Previene que aparezca el menú predeterminado del navegador
       this.menuLeft = event.clientX;
       this.menuTop = event.clientY;

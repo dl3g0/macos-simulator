@@ -21,6 +21,20 @@ export class AppComponent implements OnInit{
           case 'LOGIN':
             this.login = res['status']
             break;
+          case 'CLOSE_SESION':
+            this.boot = false;
+            this.login = true;
+              break;
+          case 'LOCK_SESION':
+            this.boot = false;
+            this.login = true;
+              break;
+          case 'RESTAR':
+            this.boot = res['status'];
+            setTimeout(() => {
+              this.boot = false;
+            }, 8000);
+            break;
           default:
             break;
         }

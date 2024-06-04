@@ -71,6 +71,14 @@
   color: white!important;
 }
 
+::ng-deep .p-menu .p-submenu-header{
+  background: transparent;
+}
+
+::ng-deep .p-menu .p-menuitem > .p-menuitem-content:hover .p-menuitem-link .p-menuitem-icon{
+  color: white!important;
+}
+
 .overlay-config {
   width: 500px;
   .icon-on,
@@ -156,4 +164,9 @@
   top: 9px;
   z-index: 2;
   border: 1px solid #d1d1d1;
+}
+
+.carpeta{
+  height: 80px;
+  cursor: pointer;
 }
