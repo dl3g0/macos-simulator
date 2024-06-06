@@ -1,4 +1,4 @@
-<div class="main-container" #container>
+<div class="main-container relative" >
     <p-menubar [model]="menubarItems" styleClass="menu-bar">
         <ng-template pTemplate="start">
             <i class="pi pi-apple"></i>
@@ -23,9 +23,12 @@
             }
             <i class="pi pi-search"></i>
             <i class="pi pi-bars" (click)="op.toggle($event)"></i>
-            <span>Fri 13:07</span>
+            <span>{{date | date:'M/d/yy, h:mm a'}}</span>
         </ng-template>
     </p-menubar>
+    <div class="main-container-second" #container>
+
+    </div>
     <div class="dock-window dock-advanced">
         <p-dock [model]="dockItems" position="bottom">
             <ng-template pTemplate="item" let-item>

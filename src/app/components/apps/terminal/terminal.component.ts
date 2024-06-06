@@ -6,6 +6,8 @@ import { Component, Output, input, output, EventEmitter } from '@angular/core';
 })
 export class TerminalComponent {
   displayTerminal = true;
+  index = 0;
+  
   @Output() close = new EventEmitter<Object>();
 
   closeDialog(){

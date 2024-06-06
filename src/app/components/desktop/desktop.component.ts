@@ -72,8 +72,6 @@ export class DesktopComponent implements OnInit, OnDestroy{
   displayVscode = false;
 
   displayTask = false;
-  positionX = null;
-  positionY = null;
   listMusic = [
     {
       url: "assets/music/LUNA.mp3",
@@ -103,7 +101,14 @@ export class DesktopComponent implements OnInit, OnDestroy{
         ]
     }
   ];
+
+  date = new Date();
   @ViewChild('container', { static: true }) container: ElementRef;
+  private draggingElement: HTMLElement | null = null;
+  private mouseMoveListener: (() => void) | null = null;
+  private mouseUpListener: (() => void) | null = null;
+  private positionX: number = 0;
+  private positionY: number = 0;
   constructor(
     private messageService: MessageService,
     private terminalService: TerminalService,
@@ -114,17 +119,128 @@ export class DesktopComponent implements OnInit, OnDestroy{
   }
 
   createFolder(){
-    const newElement = this.renderer.createElement('img');
-    this.renderer.setAttribute(newElement, 'src', '/assets/icons/folder.png');
-    this.renderer.setStyle(newElement, 'position', 'absolute');
-    this.renderer.setStyle(newElement, 'top', `${this.positionY}px`);
-    this.renderer.setStyle(newElement, 'left', `${this.positionX}px`);
-    this.renderer.addClass(newElement, 'carpeta');
+    // Crear el contenedor de la carpeta
+    const folderContainer = this.renderer.createElement('div');
+    this.renderer.setStyle(folderContainer, 'position', 'absolute');
+    this.renderer.setStyle(folderContainer, 'top', `${this.positionY}px`);
+    this.renderer.setStyle(folderContainer, 'left', `${this.positionX}px`);
+    this.renderer.setStyle(folderContainer, 'cursor', 'pointer');
+    this.renderer.setStyle(folderContainer, 'text-align', 'center');
+    this.renderer.addClass(folderContainer, 'carpeta');
 
-    // Limpiar el contenedor y agregar el nuevo elemento
+    // Crear la imagen de la carpeta
+    const folderImage = this.renderer.createElement('img');
+    this.renderer.setAttribute(folderImage, 'src', '/assets/icons/folder.png');
+    this.renderer.setStyle(folderImage, 'height', '80px');
+    this.renderer.appendChild(folderContainer, folderImage);
+
+    // Crear el nombre de la carpeta
+    const folderName = this.renderer.createElement('div');
+    const textNode = this.renderer.createText('Nueva carpeta');
+    this.renderer.appendChild(folderName, textNode);
+    this.renderer.setStyle(folderName, 'margin-top', '5px');
+    this.renderer.setStyle(folderName, 'font-size', '14px');
+    this.renderer.appendChild(folderContainer, folderName);
+
+    // Añadir eventos de arrastrar y soltar
+    this.renderer.listen(folderImage, 'mousedown', (mouseEvent: MouseEvent) => this.onMouseDown(mouseEvent, folderContainer));
+    
+    // Hacer el texto editable al hacer clic
+    this.renderer.listen(folderName, 'click', () => this.makeTextEditable(folderName));
+
+    // Agregar la carpeta al contenedor
     const containerElement = this.container.nativeElement;
-    // containerElement.innerHTML = ''; // Limpiar contenido previo
-    this.renderer.appendChild(containerElement, newElement);
+    this.renderer.appendChild(containerElement, folderContainer);
+  }
+
+  makeTextEditable(folderName: HTMLElement): void {
+    const input = this.renderer.createElement('input');
+    this.renderer.setAttribute(input, 'type', 'text');
+    this.renderer.setStyle(input, 'font-size', '14px');
+    this.renderer.setStyle(input, 'text-align', 'center');
+    this.renderer.setStyle(input, 'display', 'block');
+    input.value = folderName.innerText;
+    this.renderer.appendChild(folderName.parentNode, input);
+    this.renderer.removeChild(folderName.parentNode, folderName);
+
+    input.focus();
+    input.select();
+
+    this.renderer.listen(input, 'blur', () => this.makeTextStatic(input, folderName));
+    
+  }
+
+  makeTextStatic(input: HTMLInputElement, folderName: HTMLElement): void {
+    const newText = input.value;
+  
+    // Eliminar el input
+    this.renderer.removeChild(input.parentNode, input);
+  
+    // Revisar si el div de texto ya existe y eliminarlo si es necesario
+    const existingFolderName = folderName;
+    if (existingFolderName) {
+      this.renderer.removeChild(existingFolderName.parentNode, existingFolderName);
+    }
+  
+    // Crear el nuevo div con el texto actualizado
+    const newFolderName = this.renderer.createElement('div');
+    const textNode = this.renderer.createText(newText);
+    this.renderer.appendChild(newFolderName, textNode);
+    this.renderer.setStyle(newFolderName, 'margin-top', '5px');
+    this.renderer.setStyle(newFolderName, 'font-size', '14px');
+    this.renderer.appendChild(input.parentNode, newFolderName);
+  
+    // Añadir evento de clic para editar el texto de nuevo
+    this.renderer.listen(newFolderName, 'click', () => this.makeTextEditable(newFolderName));
+    this.renderer.listen(input, 'keydown', (event: KeyboardEvent) => {
+      if (event.key === 'Enter') {
+        this.makeTextStatic(input, folderName);
+      }
+    })
+  }
+
+  onMouseDown(event: MouseEvent, element: HTMLElement): void {
+    event.preventDefault();  // Previene comportamientos predeterminados del navegador
+
+    this.draggingElement = element;
+    this.positionX = event.clientX - element.getBoundingClientRect().left;
+    this.positionY = event.clientY - element.getBoundingClientRect().top;
+
+    // Añadir eventos para mousemove y mouseup
+    this.mouseMoveListener = this.renderer.listen('window', 'mousemove', this.onMouseMove.bind(this));
+    this.mouseUpListener = this.renderer.listen('window', 'mouseup', this.onMouseUp.bind(this));
+  }
+
+  onMouseMove(event: MouseEvent): void {
+    if (this.draggingElement) {
+      const containerRect = this.container.nativeElement.getBoundingClientRect();
+      const elementRect = this.draggingElement.getBoundingClientRect();
+
+      let xPos = event.clientX - this.positionX;
+      let yPos = event.clientY - this.positionY;
+
+      // Asegurarse de que el elemento no salga del contenedor
+      xPos = Math.max(containerRect.left, Math.min(xPos, containerRect.right - elementRect.width));
+      yPos = Math.max(containerRect.top, Math.min(yPos, containerRect.bottom - elementRect.height));
+
+      this.renderer.setStyle(this.draggingElement, 'left', `${xPos - containerRect.left}px`);
+      this.renderer.setStyle(this.draggingElement, 'top', `${yPos - containerRect.top}px`);
+    }
+  }
+
+  onMouseUp(): void {
+    // Detener el arrastre
+    this.draggingElement = null;
+
+    // Eliminar listeners de mousemove y mouseup
+    if (this.mouseMoveListener) {
+      this.mouseMoveListener();
+      this.mouseMoveListener = null;
+    }
+    if (this.mouseUpListener) {
+      this.mouseUpListener();
+      this.mouseUpListener = null;
+    }
   }
 
   ngOnInit() {
@@ -176,24 +292,24 @@ export class DesktopComponent implements OnInit, OnDestroy{
           this.displayVscode = true;
         },
       },
-      {
-        label: 'App Store',
-        tooltipOptions: {
-          tooltipLabel: 'App Store',
-          tooltipPosition: 'top',
-          positionTop: -15,
-          positionLeft: 15,
-          showDelay: 1000,
-        },
-        icon: 'assets/icons/appstore.svg',
-        command: () => {
-          // this.messageService.add({
-          //   severity: 'error',
-          //   summary: 'An unexpected error occurred while signing in.',
-          //   detail: 'UNTRUSTED_CERT_TITLE',
-          // });
-        },
-      },
+      // {
+      //   label: 'App Store',
+      //   tooltipOptions: {
+      //     tooltipLabel: 'App Store',
+      //     tooltipPosition: 'top',
+      //     positionTop: -15,
+      //     positionLeft: 15,
+      //     showDelay: 1000,
+      //   },
+      //   icon: 'assets/icons/appstore.svg',
+      //   command: () => {
+      //     // this.messageService.add({
+      //     //   severity: 'error',
+      //     //   summary: 'An unexpected error occurred while signing in.',
+      //     //   detail: 'UNTRUSTED_CERT_TITLE',
+      //     // });
+      //   },
+      // },
       {
         label: 'Safari',
         tooltipOptions: {
@@ -208,45 +324,34 @@ export class DesktopComponent implements OnInit, OnDestroy{
           this.displaySafari = true;
         },
       },
-      {
-        label: 'Photos',
-        tooltipOptions: {
-          tooltipLabel: 'Photos',
-          tooltipPosition: 'top',
-          positionTop: -15,
-          positionLeft: 15,
-          showDelay: 1000,
-        },
-        icon: 'assets/icons/photos.svg',
-        command: () => {
-          // this.displayGalleria = true;
-        },
-      },
-      {
-        label: 'GitHub',
-        tooltipOptions: {
-          tooltipLabel: 'GitHub',
-          tooltipPosition: 'top',
-          positionTop: -15,
-          positionLeft: 15,
-          showDelay: 1000,
-        },
-        icon: 'assets/icons/github.svg',
-      },
-      {
-        label: 'Trash',
-        tooltipOptions: {
-          tooltipLabel: 'Trash',
-          tooltipPosition: 'top',
-          positionTop: -15,
-          positionLeft: 15,
-          showDelay: 1000,
-        },
-        icon: 'assets/icons/trash.png',
-        command: () => {
-          // this.messageService.add({ severity: 'info', summary: 'Empty Trash' });
-        },
-      },
+      // {
+      //   label: 'Photos',
+      //   tooltipOptions: {
+      //     tooltipLabel: 'Photos',
+      //     tooltipPosition: 'top',
+      //     positionTop: -15,
+      //     positionLeft: 15,
+      //     showDelay: 1000,
+      //   },
+      //   icon: 'assets/icons/photos.svg',
+      //   command: () => {
+      //     // this.displayGalleria = true;
+      //   },
+      // },
+      // {
+      //   label: 'Trash',
+      //   tooltipOptions: {
+      //     tooltipLabel: 'Trash',
+      //     tooltipPosition: 'top',
+      //     positionTop: -15,
+      //     positionLeft: 15,
+      //     showDelay: 1000,
+      //   },
+      //   icon: 'assets/icons/trash.png',
+      //   command: () => {
+      //     // this.messageService.add({ severity: 'info', summary: 'Empty Trash' });
+      //   },
+      // },
     ];
 
     this.menubarItems = [
@@ -393,10 +498,6 @@ export class DesktopComponent implements OnInit, OnDestroy{
     this.subscription = this.terminalService.commandHandler.subscribe(
       (command) => this.commandHandler(command)
     );
-  }
-
-  dragAndDrop(){
-    
   }
 
   @HostListener('document:contextmenu', ['$event'])

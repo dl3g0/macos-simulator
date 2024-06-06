@@ -54,29 +54,46 @@
   padding: 0;
 }
 
-::ng-deep .menu-global.p-menu .p-menuitem > .p-menuitem-content{
+::ng-deep .menu-global.p-menu .p-menuitem > .p-menuitem-content {
   margin: 10px;
 }
 
-::ng-deep .menu-global.p-menu .p-menuitem > .p-menuitem-content .p-menuitem-link{
+::ng-deep
+  .menu-global.p-menu
+  .p-menuitem
+  > .p-menuitem-content
+  .p-menuitem-link {
   padding: 0.75rem 0.75rem;
 }
 
-::ng-deep .menu-global.p-menu .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover{
+::ng-deep
+  .menu-global.p-menu
+  .p-menuitem:not(.p-highlight):not(.p-disabled)
+  > .p-menuitem-content:hover {
   background: #007bff;
   border-radius: 10px;
 }
 
-::ng-deep .menu-global.p-menu .p-menuitem > .p-menuitem-content:hover .p-menuitem-link .p-menuitem-text{
-  color: white!important;
+::ng-deep
+  .menu-global.p-menu
+  .p-menuitem
+  > .p-menuitem-content:hover
+  .p-menuitem-link
+  .p-menuitem-text {
+  color: white !important;
 }
 
-::ng-deep .p-menu .p-submenu-header{
+::ng-deep .p-menu .p-submenu-header {
   background: transparent;
 }
 
-::ng-deep .p-menu .p-menuitem > .p-menuitem-content:hover .p-menuitem-link .p-menuitem-icon{
-  color: white!important;
+::ng-deep
+  .p-menu
+  .p-menuitem
+  > .p-menuitem-content:hover
+  .p-menuitem-link
+  .p-menuitem-icon {
+  color: white !important;
 }
 
 .overlay-config {
@@ -166,7 +183,15 @@
   border: 1px solid #d1d1d1;
 }
 
-.carpeta{
+.carpeta {
   height: 80px;
   cursor: pointer;
+}
+
+.main-container-second {
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 174px);
+  margin-top: 56px;
+  top: 0;
 }

@@ -1,11 +1,4 @@
-import {
-  Component,
-  Output,
-  input,
-  output,
-  EventEmitter,
-  OnInit,
-} from '@angular/core';
+import { Component, Output, input, output, EventEmitter, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-task-manager',
@@ -42,7 +35,7 @@ export class TaskManagerComponent implements OnInit {
       disco: 0.5
     }
   ];
-
+  index = 0;
   cols = [
     { field: 'name', header: 'Nombre del proceso' },
     { field: 'memory', header: 'Memoria' },
