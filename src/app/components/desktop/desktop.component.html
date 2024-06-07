@@ -113,18 +113,27 @@
         <div class="col-6 pt-0">
             <div class="grid m-0">
                 <div class="col-12 flex align-items-center glass-container pt-2 focusing" (click)="option.toggle($event)">
-                    <div>
-                        <img style="width: 40px; height: 40px; border-radius: 50%;" src="{{user.avatar}}" alt="" srcset="">
-                    </div>
-                    <div class="ml-3">
-                        <h4 class="m-0">{{user.name}}</h4>
-                    </div>
+                    @if(!user){
+                        <div>
+                            <img style="width: 40px; height: 40px; border-radius: 50%;" src="assets/icons/avatar.png" alt="" srcset="">
+                        </div>
+                        <div class="ml-3">
+                            <h4 class="m-0">Invitado</h4>
+                        </div>
+                    }@else {
+                        <div>
+                            <img style="width: 40px; height: 40px; border-radius: 50%;" src="{{user.avatar}}" alt="" srcset="">
+                        </div>
+                        <div class="ml-3">
+                            <h4 class="m-0">{{user.name}}</h4>
+                        </div> 
+                    }
+                    
                 </div>
                 <div class="col-12 p-0">
                     <div class="grid m-0">
                         <div class="col-6 pb-0 pl-0 pr-1 text-center ">
-                            <div
-                                class="glass-container flex align-items-center justify-content-center flex-column visual-organizer">
+                            <div class="glass-container flex align-items-center justify-content-center flex-column visual-organizer" (click)="themeChange()">
                                 <i class="fas fa-th-large text-lg my-2"></i>
                                 <div class="text-sm">Organizador visual</div>
                             </div>

@@ -37,7 +37,17 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              {
+                "input": "src/assets/themes/light/theme-light.scss",
+                "bundleName": "light",
+                "inject": false
+              },
+              {
+                "input": "src/assets/themes/dark/theme-dark.scss",
+                "bundleName": "dark",
+                "inject": false
+              }
             ],
             "scripts": [
               "node_modules/apexcharts/dist/apexcharts.min.js"
