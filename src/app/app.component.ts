@@ -8,8 +8,8 @@ import { MessageService } from 'primeng/api';
   providers: [MessageService],
 })
 export class AppComponent implements OnInit{
-  boot = false;
-  login = false;
+  boot = true;
+  login = true;
 
   constructor(private globalService: GlobalService,  private messageService: MessageService){
     this.globalService.request.subscribe((res) => {
