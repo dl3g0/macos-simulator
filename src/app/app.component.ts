@@ -45,6 +45,7 @@ export class AppComponent implements OnInit{
     setTimeout(() => {
       this.boot = false;
     }, 8000);
+    this.set_initial_setup();
   }
 
   async showToast(data) {
@@ -58,5 +59,11 @@ export class AppComponent implements OnInit{
       };
       this.messageService.add(messageToast);
     
+  }
+
+  set_initial_setup() {
+    let theme = localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light';
+    localStorage.setItem('theme', theme);
+    this.globalService.switchTheme(theme);
   }
 }

@@ -19,6 +19,9 @@ import { GlobalService } from '../../services/global.service';
 })
 export class DesktopComponent implements OnInit, OnDestroy{
   @ViewChild('menu') menu: any;
+
+  themeStatus = false;
+
   displayTerminal: boolean | undefined;
 
   displayFinder: boolean | undefined;
@@ -561,5 +564,12 @@ export class DesktopComponent implements OnInit, OnDestroy{
   wifi(){
     this.wifiOn = !this.wifiOn;
     this.globalService.sendRequest({ type: 'STATUS_WIFI', status: this.wifiOn });
+  }
+
+  themeChange() {
+    this.themeStatus = !this.themeStatus;
+    let theme = this.themeStatus ? 'dark' : 'light';
+    localStorage.setItem('theme', theme);
+    this.globalService.switchTheme(theme);
   }
 }

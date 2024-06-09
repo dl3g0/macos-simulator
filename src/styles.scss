@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-@import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
 @import "primeflex/primeflex.css";
@@ -15,4 +14,8 @@ body {
 .p-dialog .p-dialog-header{
   backdrop-filter: blur(12px);
   background: rgb(255 255 255 / 30%);
+}
+
+.p-dock-bottom {
+  margin-bottom: 10px;
 }
