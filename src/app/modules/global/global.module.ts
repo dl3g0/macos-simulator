@@ -13,7 +13,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { TaskManagerComponent } from '../../components/apps/task-manager/task-manager.component';
 import { NoNetworkComponent } from '../../components/apps/safari/no-network/no-network.component';
 
-
+import { NgxGamepadModule } from 'ngx-gamepad';
+import { XboxControllerComponent } from '../../components/apps/xbox-controller/xbox-controller.component';
 
 
 @NgModule({
@@ -27,12 +28,14 @@ import { NoNetworkComponent } from '../../components/apps/safari/no-network/no-n
     NotifyComponent,
     VsCodeComponent,
     TaskManagerComponent,
-    NoNetworkComponent
+    NoNetworkComponent,
+    XboxControllerComponent
   ],
   imports: [
     CommonModule,
     PrimengModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    NgxGamepadModule
   ],
   exports:[
     BootComponent,
@@ -47,7 +50,9 @@ import { NoNetworkComponent } from '../../components/apps/safari/no-network/no-n
     VsCodeComponent,
     NgApexchartsModule,
     TaskManagerComponent,
-    NoNetworkComponent
+    NoNetworkComponent,
+    NgxGamepadModule,
+    XboxControllerComponent
   ]
 })
 export class GlobalModule { }

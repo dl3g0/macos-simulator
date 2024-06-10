@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-
+import { GamepadService } from 'ngx-gamepad';
+import { GlobalService } from '../../../../services/global.service';
 @Component({
   selector: 'app-no-network',
   templateUrl: './no-network.component.html',
@@ -66,9 +67,22 @@ export class NoNetworkComponent implements OnInit, AfterViewInit{
   onG: boolean = false;
   sprImg = new Image();
 
+  constructor(private gamepad: GamepadService, private globalService: GlobalService){
+    this.globalService.request.subscribe((res) => {
+      if (res) {
+        switch (res['type']) {
+          case 'GAMEPAD':
+            this.keyDown(res['buttonId'])
+            break;
+          default:
+            break;
+        }
+      }
+    });
+  }
+
   ngOnInit(): void {
 
-    
   }
 
   ngAfterViewInit(): void {
@@ -87,6 +101,7 @@ export class NoNetworkComponent implements OnInit, AfterViewInit{
     }
     
   }
+
   update(): void {
     if (!this.onG) {
       this.p.yv += this.grav;
@@ -236,9 +251,17 @@ export class NoNetworkComponent implements OnInit, AfterViewInit{
     this.multiB = -1;
   }
 
-  keyDown(evt: KeyboardEvent): void {
-    console.log(evt)
+  keyDown(evt): void {
     if (evt.keyCode == 32 ) {
+      if (this.onG) {
+        this.p.yv = -this.p.jump;
+      }
+      
+      if (this.gamespeed == 0) {
+        this.gamespeed = 7;
+      }
+    }
+    if (evt == 'button0' ) {
       if (this.onG) {
         this.p.yv = -this.p.jump;
       }

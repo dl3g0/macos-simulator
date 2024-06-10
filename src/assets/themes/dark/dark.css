@@ -1793,11 +1793,17 @@
       border-radius: 6px;
     }
     .p-slider.p-slider-horizontal {
-      height: 3px;
+      height: 24px;
+      border-radius: 20px;
     }
     .p-slider.p-slider-horizontal .p-slider-handle {
       margin-top: -10px;
       margin-left: -10px;
+      box-shadow: 0 4px 10px #00000008, 0 0 2px #0000000f, 0 2px 6px #0000001f;
+      height: 24px;
+      width: 24px;
+      top: 10px;
+      background: #09090b;
     }
     .p-slider.p-slider-vertical {
       width: 3px;
@@ -1820,6 +1826,8 @@
       box-shadow: none;
     }
     .p-slider .p-slider-range {
+      background: #fff;
+      border-radius: 20px 0 0 20px;
       background: #60a5fa;
     }
     .p-slider:not(.p-disabled) .p-slider-handle:hover {
@@ -4341,11 +4349,10 @@
     .p-dialog {
       border-radius: 6px;
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-      border: 1px solid #3f3f46;
     }
     .p-dialog .p-dialog-header {
       border-bottom: 0 none;
-      background: #18181b;
+      background: rgb(24 24 27 / 30%);
       color: #ffffff;
       padding: 1.5rem;
       border-top-right-radius: 6px;
@@ -4413,11 +4420,11 @@
     }
   
     .p-overlaypanel {
-      background: #18181b;
-      color: #ffffff;
-      border: 1px solid #3f3f46;
-      border-radius: 6px;
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      border-radius: 18px;
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      background: #18181b4d;
     }
     .p-overlaypanel .p-overlaypanel-content {
       padding: 0 1.125rem 1.125rem 1.125rem;
@@ -4438,14 +4445,10 @@
       color: #020617;
     }
     .p-overlaypanel:after {
-      border: solid transparent;
-      border-color: rgba(24, 24, 27, 0);
-      border-bottom-color: #18181b;
+      display: none;
     }
     .p-overlaypanel:before {
-      border: solid transparent;
-      border-color: rgba(63, 63, 70, 0);
-      border-bottom-color: #3c3c43;
+     display: none;
     }
     .p-overlaypanel.p-overlaypanel-flipped:after {
       border-top-color: #18181b;
@@ -4689,6 +4692,7 @@
       border-radius: 1.2rem;
       background: rgb(0 0 0 / 30%);
       backdrop-filter: blur(12px);
+      padding: .5rem;
     }
     .p-dock .p-dock-list-container .p-dock-list {
       outline: 0 none;
@@ -4703,8 +4707,8 @@
       box-shadow: 0 none;
     }
     .p-dock .p-dock-link {
-      width: 3rem;
-      height: 3rem;
+      width: 4rem;
+      height: 4rem;
     }
     .p-dock.p-dock-top .p-dock-item-second-prev,
   .p-dock.p-dock-top .p-dock-item-second-next, .p-dock.p-dock-bottom .p-dock-item-second-prev,
@@ -4883,7 +4887,6 @@
       padding: 0.25rem 0.25rem;
       background: #18181b;
       color: #ffffff;
-      border: 1px solid #3f3f46;
       border-radius: 6px;
       width: 12.5rem;
     }
@@ -4901,7 +4904,6 @@
       color: #ffffff;
     }
     .p-menu .p-menuitem > .p-menuitem-content .p-menuitem-link .p-menuitem-icon {
-      color: #71717a;
       margin-right: 0.5rem;
     }
     .p-menu .p-menuitem > .p-menuitem-content .p-menuitem-link .p-submenu-icon {
@@ -4934,7 +4936,7 @@
     }
     .p-menu .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover {
       color: #ffffff;
-      background: rgba(255, 255, 255, 0.03);
+      background: var(--primary-color);
     }
     .p-menu .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover .p-menuitem-link .p-menuitem-text {
       color: #ffffff;
@@ -4944,15 +4946,13 @@
       color: #ffffff;
     }
     .p-menu.p-menu-overlay {
-      background: #18181b;
-      border: 1px solid #3f3f46;
+      backdrop-filter: blur(12px);
+      background: #18181b4d;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
     }
     .p-menu .p-submenu-header {
       margin: 0;
       padding: 0.5rem 0.75rem;
-      color: #71717a;
-      background: #18181b;
       font-weight: 600;
       border-top-right-radius: 0;
       border-top-left-radius: 0;
@@ -6329,7 +6329,6 @@
     .p-terminal {
       background: #18181b;
       color: #ffffff;
-      border: 1px solid #3f3f46;
       padding: 0 1.125rem 1.125rem 1.125rem;
     }
     .p-terminal .p-terminal-input {
@@ -6625,7 +6624,6 @@
   
     .p-dialog {
       border-radius: 12px;
-      background-color: #18181b;
     }
     .p-dialog.p-dialog-maximized {
       border-radius: 0;
@@ -7341,9 +7339,7 @@
       width: 16px;
       height: 16px;
       display: block;
-      background-color: #09090b;
       border-radius: 50%;
-      box-shadow: 0px 0.5px 0px 0px rgba(0, 0, 0, 0.08), 0px 1px 1px 0px rgba(0, 0, 0, 0.14);
     }
     .p-slider .p-slider-handle:focus-visible {
       outline: 0 none;
@@ -7483,7 +7479,6 @@
     .p-terminal {
       background: #09090b;
       color: #ffffff;
-      border: 1px solid #3f3f46;
       padding: 0.5rem 0.75rem;
       border-radius: 6px;
     }

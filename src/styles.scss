@@ -8,14 +8,54 @@ body {
   height: 100vh;
   width: 100vw;
   margin: 0;
-  cursor: url('assets/icons/cursor.png'), auto;
+  cursor: url("assets/icons/cursor.png"), auto;
 }
 
-.p-dialog .p-dialog-header{
+.p-dialog .p-dialog-header {
+  padding: 10px;
   backdrop-filter: blur(12px);
-  background: rgb(255 255 255 / 30%);
 }
 
 .p-dock-bottom {
   margin-bottom: 10px;
+}
+
+.p-menubar-start {
+  margin-left: 10px;
+  margin-right: 15px;
+}
+
+.p-menubar-end {
+  i,
+  span {
+    margin-left: 15px;
+    margin-right: 15px;
+    cursor: pointer;
+  }
+  i:last-child {
+    margin-left: 15px;
+    margin-right: 10px;
+  }
+}
+
+.p-menu ul li {
+  margin: 5px 10px;
+}
+
+.close,
+.maximize,
+.minimize {
+  cursor: pointer;
+}
+
+.close {
+  color: #ee4450;
+}
+
+.maximize {
+  color: #f6b52e;
+}
+
+.minimize {
+  color: #2edc3f;
 }

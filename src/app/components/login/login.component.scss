@@ -56,48 +56,48 @@
   }
 }
 
-// ::ng-deep .p-password{
-//   .p-inputtext{
-//     backdrop-filter: blur(12px);
-//     background: rgb(255 255 255 / 30%);
-//     border-radius: 30px;
-//   }
+::ng-deep .p-password{
+  .p-inputtext{
+    backdrop-filter: blur(12px);
+    background: rgb(255 255 255 / 30%);
+    border-radius: 30px;
+  }
 
-//   .p-inputtext::placeholder {
-//     color: white;
-//     opacity: 0.5;
-//   }
-// }
+  .p-inputtext::placeholder {
+    color: white;
+    opacity: 0.5;
+  }
+}
 .loging{
-  // ::ng-deep .menu-bar.p-menubar {
-  //   border: 0px;
-  //   background: #ffffff01;
-  //   border-radius: 0;
-  //   .p-menubar-start {
-  //     margin-left: 10px;
-  //     margin-right: 15px;
-  //   }
-  //   .p-menubar-end {
-  //     i,
-  //     span {
-  //       margin-left: 15px;
-  //       margin-right: 15px;
-  //       cursor: pointer;
-  //     }
-  //     i:last-child {
-  //       margin-left: 15px;
-  //       margin-right: 10px;
-  //     }
-  //   }
-  //   .p-menubar-root-list
-  //     > .p-menuitem:not(.p-highlight):not(.p-disabled)
-  //     > .p-menuitem-content:hover {
-  //     background: rgba(255, 255, 255, 0.2);
-  //   }
+  ::ng-deep .menu-bar.p-menubar {
+    border: 0px;
+    background: #ffffff01;
+    border-radius: 0;
+    .p-menubar-start {
+      margin-left: 10px;
+      margin-right: 15px;
+    }
+    .p-menubar-end {
+      i,
+      span {
+        margin-left: 15px;
+        margin-right: 15px;
+        cursor: pointer;
+      }
+      i:last-child {
+        margin-left: 15px;
+        margin-right: 10px;
+      }
+    }
+    .p-menubar-root-list
+      > .p-menuitem:not(.p-highlight):not(.p-disabled)
+      > .p-menuitem-content:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
   
-  //   .p-menuitem.p-highlight > .p-menuitem-content {
-  //     background: rgba(255, 255, 255, 0.2);
-  //     color: #4b5563;
-  //   }
-  // }
+    .p-menuitem.p-highlight > .p-menuitem-content {
+      background: rgba(255, 255, 255, 0.2);
+      color: #4b5563;
+    }
+  }
 }

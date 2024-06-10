@@ -63,6 +63,10 @@
     <app-task-manager (close)="displayTask = false;"></app-task-manager>
 }
 
+@if(displayController){
+    <app-xbox-controller (close)="displayController = false;"></app-xbox-controller>
+}
+
 <p-overlayPanel #op>
     <div class="grid m-0 overlay-config">
         <div class="col-6">
@@ -132,17 +136,17 @@
                 </div>
                 <div class="col-12 p-0">
                     <div class="grid m-0">
-                        <div class="col-6 pb-0 pl-0 pr-1 text-center ">
+                        <div class="col-6 pb-0 pl-0 pr-1 text-center cursor-pointer">
                             <div class="glass-container flex align-items-center justify-content-center flex-column visual-organizer" (click)="themeChange()">
-                                <i class="fas fa-th-large text-lg my-2"></i>
-                                <div class="text-sm">Organizador visual</div>
+                                <i class="fas fa-adjust text-lg my-2"></i>
+                                <div class="text-sm">Dark mode</div>
                             </div>
                         </div>
-                        <div class="col-6 pb-0 pr-0 pl-1 text-center ">
+                        <div class="col-6 pb-0 pr-0 pl-1 text-center cursor-pointer">
                             <div
                                 class="glass-container flex align-items-center justify-content-center flex-column mirror-screen">
                                 <i class="far fa-clone text-lg my-2"></i>
-                                <div class="text-sm">Duplicar pantalla</div>
+                                <div class="text-sm">Game mode</div>
                             </div>
                         </div>
                     </div>
