@@ -9,8 +9,8 @@ import { GamepadService } from 'ngx-gamepad';
   providers: [MessageService],
 })
 export class AppComponent implements OnInit{
-  boot = true;
-  login = true;
+  boot = false;
+  login = false;
 
   constructor(private globalService: GlobalService,  private messageService: MessageService, private gamepad: GamepadService){
     this.globalService.request.subscribe((res) => {

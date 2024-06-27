@@ -1,6 +1,6 @@
 <p-dialog #terminalDialog [(visible)]="displayTerminal" [breakpoints]="{ '960px': '50vw' }"
 [style]="{ width: '30vw', minWidth: '60vw', minHeight: '500px' }"  [closable]="false" [draggable]="true"
-    [resizable]="true" (click)="terminalDialog.moveOnTop()">
+    [resizable]="true" (click)="terminalDialog.moveOnTop()" styleClass="terminal">
     <ng-template pTemplate="header">
         <div class="inline-flex align-items-center justify-content-center gap-2">
             <i class="fas fa-circle close" (click)="closeDialog();"></i>
@@ -8,6 +8,5 @@
             <i class="fas fa-circle minimize" (click)="terminalDialog.maximize()"></i>
         </div>
     </ng-template>
-    <p-terminal welcomeMessage="Bienvenido a MacOS"
-        prompt="$"></p-terminal>
+    <p-terminal welcomeMessage="Bienvenido a MacOS" prompt="$" ></p-terminal>
 </p-dialog>

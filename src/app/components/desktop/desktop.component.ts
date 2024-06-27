@@ -41,6 +41,7 @@ export class DesktopComponent implements OnInit, OnDestroy{
 
   subscription: Subscription | undefined;
 
+  displaySpotify = true;
   boot = true;
   wifiOn = false;
   bluetoothOn = false;

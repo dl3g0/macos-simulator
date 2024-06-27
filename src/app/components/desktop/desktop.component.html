@@ -67,6 +67,10 @@
     <app-xbox-controller (close)="displayController = false;"></app-xbox-controller>
 }
 
+@if(displaySpotify){
+    <app-spotify></app-spotify>
+}
+
 <p-overlayPanel #op>
     <div class="grid m-0 overlay-config">
         <div class="col-6">

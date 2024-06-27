@@ -15,6 +15,7 @@ import { NoNetworkComponent } from '../../components/apps/safari/no-network/no-n
 
 import { NgxGamepadModule } from 'ngx-gamepad';
 import { XboxControllerComponent } from '../../components/apps/xbox-controller/xbox-controller.component';
+import { SpotifyComponent } from '../../components/apps/spotify/spotify.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { XboxControllerComponent } from '../../components/apps/xbox-controller/x
     VsCodeComponent,
     TaskManagerComponent,
     NoNetworkComponent,
-    XboxControllerComponent
+    XboxControllerComponent,
+    SpotifyComponent
   ],
   imports: [
     CommonModule,

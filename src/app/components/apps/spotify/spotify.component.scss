@@ -1,0 +1,29 @@
+.container-init-and-search{
+    color: rgba(255, 255, 255, 0.702);
+    i{
+        display: inline-block;
+        margin-right: 30px;
+        font-size: 20px;
+    }
+}
+
+.main-cards{
+    background: #121212;
+    border-radius: 10px;
+}
+
+.container-song-info{
+    color: white;
+    img{
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+    }
+    span{
+        display: inline-block;
+        margin-top: 5px;
+        color: rgba(255, 255, 255, 0.702);
+    }
+        
+    
+}
