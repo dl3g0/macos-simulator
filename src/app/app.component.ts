@@ -9,8 +9,8 @@ import { GamepadService } from 'ngx-gamepad';
   providers: [MessageService],
 })
 export class AppComponent implements OnInit{
-  boot = false;
-  login = false;
+  boot = true;
+  login = true;
 
   constructor(private globalService: GlobalService,  private messageService: MessageService, private gamepad: GamepadService){
     this.globalService.request.subscribe((res) => {
@@ -45,7 +45,7 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     setTimeout(() => {
       this.boot = false;
-    }, 8000);
+    }, 3000);
     this.set_initial_setup();
     this.listenToGamepad();
   }
