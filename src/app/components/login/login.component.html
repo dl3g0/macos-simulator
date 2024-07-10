@@ -33,24 +33,23 @@
             <div class="flex align-items-center justify-content-center gap-5 ">
                         <div class="flex flex-column align-items-center">
                             <div class="image-login relative mb-4 cursor-pointer mx-4">
-                                <img src="{{selectedUser.avatar}}" alt="" srcset="">
+                                <img src="{{selectedUser.avatar}}" alt="" srcset="" fetchpriority="high">
                             </div>
                             <span class="name-user-login white-space-nowrap overflow-hidden text-overflow-ellipsis cursor-pointer mb-4">
                                 {{selectedUser.name}}
                             </span>
-
-                            <div class="p-2 flex">
-                                <p-password [style]="{'height' : '100%'}" [(ngModel)]="password" [feedback]="false" placeholder="Ingresar contraseña" /> 
+                            @if(selectedUser.password){
+                                <div class="p-2 flex">
+                                    <p-password [style]="{'height' : '100%'}"  [(ngModel)]="password" [feedback]="false" placeholder="Ingresar contraseña" /> 
+                                    <div class="login-button flex align-items-ceter justify-content-center" (click)="login()">
+                                        <i class="fas fa-arrow-right flex align-items-center"></i>
+                                    </div>
+                                </div>
+                            }@else{
                                 <div class="login-button flex align-items-ceter justify-content-center" (click)="login()">
                                     <i class="fas fa-arrow-right flex align-items-center"></i>
                                 </div>
-                            </div>
-                            @if(statusPass && selectedUser && (password != selectedUser.password)){
-                                <div class="p-2 flex justify-content-center">
-                                    <span class="font-bold" style="color: var(--pink-500);">Contraseña incorrecta</span>
-                                </div>
                             }
-                            
                         </div>
             </div>
         }

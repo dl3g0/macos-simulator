@@ -16,6 +16,8 @@ import { NoNetworkComponent } from '../../components/apps/safari/no-network/no-n
 import { NgxGamepadModule } from 'ngx-gamepad';
 import { XboxControllerComponent } from '../../components/apps/xbox-controller/xbox-controller.component';
 import { SpotifyComponent } from '../../components/apps/spotify/spotify.component';
+import { PinballComponent } from '../../components/apps/pinball/pinball.component';
+import { TetrisComponent } from '../../components/apps/tetris/tetris.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { SpotifyComponent } from '../../components/apps/spotify/spotify.componen
     TaskManagerComponent,
     NoNetworkComponent,
     XboxControllerComponent,
-    SpotifyComponent
+    SpotifyComponent,
+    PinballComponent,
+    TetrisComponent
   ],
   imports: [
     CommonModule,
@@ -54,7 +58,9 @@ import { SpotifyComponent } from '../../components/apps/spotify/spotify.componen
     TaskManagerComponent,
     NoNetworkComponent,
     NgxGamepadModule,
-    XboxControllerComponent
+    XboxControllerComponent,
+    PinballComponent,
+    TetrisComponent
   ]
 })
 export class GlobalModule { }

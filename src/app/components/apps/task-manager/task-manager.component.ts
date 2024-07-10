@@ -33,6 +33,22 @@ export class TaskManagerComponent implements OnInit {
       cpu: 5,
       gpu: 10,
       disco: 0.5
+    },
+    {
+      id: "SO_PROCCESS",
+      name: "Procesos en primer plano",
+      memory: 100,
+      cpu: 5,
+      gpu: 10,
+      disco: 0.5
+    },
+    {
+      id: "SO_PROCCESS_SECOND",
+      name: "Procesos en segundo plano",
+      memory: 100,
+      cpu: 5,
+      gpu: 10,
+      disco: 0.5
     }
   ];
   index = 0;

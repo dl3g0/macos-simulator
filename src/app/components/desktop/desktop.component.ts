@@ -47,7 +47,7 @@ export class DesktopComponent implements OnInit, OnDestroy{
   bluetoothOn = false;
   airdropOn = false;
   valueScreen = 99;
-  valueSound = 50;
+  valueSound = 100;
   login = true;
   focusingOn = false;
 
@@ -107,6 +107,8 @@ export class DesktopComponent implements OnInit, OnDestroy{
     }
   ];
   displayController = false;
+  displayPinball = false;
+  displayTetris = false;
   date = new Date();
   @ViewChild('container', { static: true }) container: ElementRef;
   private draggingElement: HTMLElement | null = null;
@@ -114,13 +116,28 @@ export class DesktopComponent implements OnInit, OnDestroy{
   private mouseUpListener: (() => void) | null = null;
   private positionX: number = 0;
   private positionY: number = 0;
+  currentSong = null;
   constructor(
     private messageService: MessageService,
     private terminalService: TerminalService,
     private globalService: GlobalService,
     private renderer: Renderer2,
   ) {
-    this.user = JSON.parse(localStorage.getItem('user'))
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.globalService.request.subscribe((res) => {
+      if (res) {
+        switch (res['type']) {
+          case 'CURRENT_SONG':
+           this.currentSong = res['value'];
+            break;
+          case 'VOLUMEN_SONG':
+            this.valueSound = res['value'] * 100;
+            break;
+          default:
+            break;
+        }
+      }
+    });
   }
   ngOnInit() {
     this.wifi();
@@ -130,7 +147,7 @@ export class DesktopComponent implements OnInit, OnDestroy{
     }, 8000);
     this.dockItems = [
       {
-        label: 'Finder',
+        label: 'Pinball',
         tooltipOptions: {
           tooltipLabel: 'Finder',
           tooltipPosition: 'top',
@@ -138,9 +155,23 @@ export class DesktopComponent implements OnInit, OnDestroy{
           positionLeft: 15,
           showDelay: 1000,
         },
-        icon: 'assets/icons/finder.svg',
+        icon: 'assets/icons/pinball.png',
         command: () => {
-          // this.displayFinder = true;
+          this.displayPinball = true;
+        },
+      },
+      {
+        label: 'Tetris',
+        tooltipOptions: {
+          tooltipLabel: 'Finder',
+          tooltipPosition: 'top',
+          positionTop: -15,
+          positionLeft: 15,
+          showDelay: 1000,
+        },
+        icon: 'assets/icons/tetris.png',
+        command: () => {
+          this.displayTetris = true;
         },
       },
       {
@@ -169,6 +200,21 @@ export class DesktopComponent implements OnInit, OnDestroy{
         icon: 'assets/icons/vscode.png',
         command: () => {
           this.displayVscode = true;
+        },
+      },
+      {
+        label: 'Spotify',
+        tooltipOptions: {
+          tooltipLabel: 'Terminal',
+          tooltipPosition: 'top',
+          positionTop: -15,
+          positionLeft: 15,
+          showDelay: 1000,
+        },
+        icon: 'assets/icons/spotify.png',
+        command: () => {
+          this.displaySpotify = true;
+          this.globalService.sendRequest({ type: 'SHOW_DIALOG' });
         },
       },
       {
@@ -439,5 +485,9 @@ export class DesktopComponent implements OnInit, OnDestroy{
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  setValueVolumen(){
+    this.globalService.sendRequest({ type: 'VOLUMEN_SONG_OVERLAY', value: this.valueSound });
   }
 }

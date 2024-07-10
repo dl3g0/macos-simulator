@@ -1,0 +1,11 @@
+<p-dialog #pinball [(visible)]="displayPinball" [style]="{ width: '606px'}" [closable]="false" [draggable]="true" [resizable]="false" (click)="pinball.moveOnTop()">
+    <ng-template pTemplate="header">
+        <div class="inline-flex align-items-center justify-content-center gap-2">
+            <i class="fas fa-circle close" (click)="closeDialog()"></i>
+            <i class="fas fa-circle maximize" (click)="closeDialog()"></i>
+        </div>
+    </ng-template>
+    
+    <iframe style="height: 466px; width: 606px; margin-top: -20px;" src="https://alula.github.io/SpaceCadetPinball/" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+    
+</p-dialog>

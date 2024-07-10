@@ -1,25 +1,31 @@
-<div class="main-container relative" >
+<div class="main-container relative" id="main-container">
     <p-menubar [model]="menubarItems" styleClass="menu-bar">
         <ng-template pTemplate="start">
             <i class="pi pi-apple"></i>
         </ng-template>
         <ng-template pTemplate="end">
             @if(valueSound >=50){
-                <i class="fas fa-volume-up"></i>
+                <i class="fas fa-volume-up" (click)="valueSound = 0;"></i>
             }@else if(valueSound < 50 && valueSound >= 30){
                 <i class="fas fa-volume-down"></i>
             }@else{
-                <i class="fas fa-volume-off"></i>
+                <i class="fas fa-volume-off" (click)="valueSound = 100;"></i>
             }
             
             @if(wifiOn){
-              <i class="pi pi-wifi"></i>  
+              <i class="pi pi-wifi" (click)="wifiOn = false;"></i>  
+            }@else{
+                <i class="pi pi-wifi opacity-50" (click)="wifiOn = true;"></i>  
             }
             @if(bluetoothOn){
-                <i class="fab fa-bluetooth-b"></i>  
+                <i class="fab fa-bluetooth-b" (click)="bluetoothOn = false;"></i>  
+            }@else{
+                <i class="fab fa-bluetooth-b opacity-50" (click)="bluetoothOn = true;"></i>  
             }
             @if(airdropOn){
-                <i class="fas fa-satellite-dish"></i>
+                <i class="fas fa-satellite-dish" (click)="airdropOn = false;"></i>
+            }@else {
+                <i class="fas fa-satellite-dish opacity-50" (click)="airdropOn = true;"></i>
             }
             <i class="pi pi-search"></i>
             <i class="pi pi-bars" (click)="op.toggle($event)"></i>
@@ -29,7 +35,7 @@
     <div class="main-container-second" #container>
 
     </div>
-    <div class="dock-window dock-advanced">
+    <div class="dock-window dock-advanced" >
         <p-dock [model]="dockItems" position="bottom">
             <ng-template pTemplate="item" let-item>
                 <img [src]="item.icon" [alt]="item.label" width="100%" />
@@ -68,7 +74,15 @@
 }
 
 @if(displaySpotify){
-    <app-spotify></app-spotify>
+    <app-spotify (close)="displaySpotify = false;"></app-spotify>
+}
+
+@if(displayPinball){
+    <app-pinball (close)="displayPinball = false;"></app-pinball>
+}
+
+@if(displayTetris){
+    <app-tetris (close)="displayTetris = false;"></app-tetris>
 }
 
 <p-overlayPanel #op>
@@ -174,25 +188,27 @@
                     <b>Sonido</b>
                 </div>
                 <div class="col-12 flex align-items-center">
-                    <p-slider class="w-full" [style]="{'width': '100%'}" [(ngModel)]="valueSound"></p-slider>
+                    <p-slider class="w-full" [style]="{'width': '100%'}" [(ngModel)]="valueSound" (onChange)="setValueVolumen()"></p-slider>
                 </div>
             </div>
         </div>
-        <div class="col-12 pb-0">
-            <div class="grid glass-container">
-                <div style="width: 50px; height: 50px;">
-                    <img style="border-radius: 50%;" class="w-full h-full" src="https://i.scdn.co/image/ab67616d0000b273f1aad814a40ec7419c234242" alt="" srcset="">
-                </div>
-                <div class="col">
-                    <div>
-                        <b class="text-lg">LUNA</b>
+        @if(currentSong){
+            <div class="col-12 pb-0">
+                <div class="grid glass-container">
+                    <div style="width: 50px; height: 50px;">
+                        <img style="border-radius: 50%;" class="w-full h-full" src="{{currentSong.image}}" alt="" srcset="">
                     </div>
-                    <div class="text-sm">
-                        FERXXO
+                    <div class="col">
+                        <div>
+                            <b class="text-lg">{{ currentSong.title }}</b>
+                        </div>
+                        <div class="text-sm">
+                            {{ currentSong.artist }}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        }
     </div>
 </p-overlayPanel>
 
