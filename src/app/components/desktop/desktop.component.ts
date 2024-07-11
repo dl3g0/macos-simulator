@@ -11,7 +11,7 @@ import { MenuItem, MessageService } from 'primeng/api';
 import { TerminalService } from 'primeng/terminal';
 import { Subscription } from 'rxjs';
 import { GlobalService } from '../../services/global.service';
-
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-desktop',
   templateUrl: './desktop.component.html',
@@ -51,26 +51,7 @@ export class DesktopComponent implements OnInit, OnDestroy{
   login = true;
   focusingOn = false;
 
-  itemsMenuAntiClick = [
-    {
-      label: 'Nueva carpeta',
-      command: () => {
-        this.createFolder();
-      }
-    },
-    {
-      label: 'Vaciar papelera'
-    },
-    {
-      label: 'Cambiar fondo de escritorio'
-    },
-    {
-      label: 'Administrador de tareas',
-      command: () => {
-        this.displayTask = true;
-      }
-    }
-  ];
+  itemsMenuAntiClick = [];
   menuLeft: number = 0;
   menuTop: number = 0;
   displaySafari = false;
@@ -117,16 +98,22 @@ export class DesktopComponent implements OnInit, OnDestroy{
   private positionX: number = 0;
   private positionY: number = 0;
   currentSong = null;
+  lang = "es";
+  langStatus = false;
   constructor(
     private messageService: MessageService,
     private terminalService: TerminalService,
     private globalService: GlobalService,
     private renderer: Renderer2,
+    public trans: TranslateService
   ) {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.globalService.request.subscribe((res) => {
       if (res) {
         switch (res['type']) {
+          case 'UPDATELANG':
+            this.translateService();
+            break;
           case 'CURRENT_SONG':
            this.currentSong = res['value'];
             break;
@@ -247,31 +234,6 @@ export class DesktopComponent implements OnInit, OnDestroy{
       }
     ];
 
-    this.menubarItems = [
-      {
-        label: 'Finder',
-        styleClass: 'menubar-root',
-      },
-      {
-        label: 'Archivo'
-      },
-      {
-        label: 'Edicion'
-      },
-      {
-        label: 'Visualizacion'
-      },
-      {
-        label: 'Ir',
-      },
-      {
-        label: 'Ventana',
-      },
-      {
-        label: 'Ayuda',
-      },
-    ];
-
     this.responsiveOptions = [
       {
         breakpoint: '1024px',
@@ -290,6 +252,51 @@ export class DesktopComponent implements OnInit, OnDestroy{
     this.subscription = this.terminalService.commandHandler.subscribe(
       (command) => this.commandHandler(command)
     );
+    this.translateService();
+  }
+
+ async  translateService(){
+    let textLang:any = await new Promise((resolve, reject) => {
+      this.trans.get('topBar').subscribe((res) => {
+        resolve(res);
+      });
+    });
+
+  this.menubarItems = [
+    {
+      label: textLang['file']
+    },
+    {
+      label: textLang['edition']
+    },
+    {
+      label: textLang['view']
+    },
+    {
+      label: textLang['go'],
+    },
+    {
+      label: textLang['window'],
+    },
+    {
+      label: textLang['help'],
+    },
+  ];
+
+  this.itemsMenuAntiClick = [
+    {
+      label: textLang['new_folder'],
+      command: () => {
+        this.createFolder();
+      }
+    },
+    {
+      label: textLang['task_manager'],
+      command: () => {
+        this.displayTask = true;
+      }
+    }
+  ];
   }
 
   createFolder(){
@@ -487,7 +494,24 @@ export class DesktopComponent implements OnInit, OnDestroy{
     }
   }
 
+  setVolumenDown(){
+    this.valueSound  = 0;
+    this.globalService.sendRequest({ type: 'VOLUMEN_SONG_OVERLAY', value: this.valueSound });
+  }
+
+  setVolumenUp(){
+    this.valueSound = 100;
+    this.globalService.sendRequest({ type: 'VOLUMEN_SONG_OVERLAY', value: this.valueSound });
+  }
+
   setValueVolumen(){
     this.globalService.sendRequest({ type: 'VOLUMEN_SONG_OVERLAY', value: this.valueSound });
+  }
+
+  langChange() {
+    this.lang = this.langStatus ? 'en' : 'es';
+    localStorage.setItem('lang', this.lang);
+    this.globalService.changeLanguage(this.lang);
+    this.globalService.sendRequest({ type: 'UPDATELANG' });
   }
 }

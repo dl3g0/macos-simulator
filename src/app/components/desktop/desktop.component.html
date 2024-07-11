@@ -4,18 +4,24 @@
             <i class="pi pi-apple"></i>
         </ng-template>
         <ng-template pTemplate="end">
+            @if(langStatus){
+                <span (click)="langStatus = false; langChange()">Es</span>
+            }@else{
+                <span (click)="langStatus = true; langChange()">En</span>
+            }
+            
             @if(valueSound >=50){
-                <i class="fas fa-volume-up" (click)="valueSound = 0;"></i>
+                <i class="fas fa-volume-up" (click)="setVolumenDown()"></i>
             }@else if(valueSound < 50 && valueSound >= 30){
                 <i class="fas fa-volume-down"></i>
             }@else{
-                <i class="fas fa-volume-off" (click)="valueSound = 100;"></i>
+                <i class="fas fa-volume-off" (click)="setVolumenUp()"></i>
             }
             
             @if(wifiOn){
-              <i class="pi pi-wifi" (click)="wifiOn = false;"></i>  
+              <i class="pi pi-wifi" (click)="wifi()"></i>  
             }@else{
-                <i class="pi pi-wifi opacity-50" (click)="wifiOn = true;"></i>  
+                <i class="pi pi-wifi opacity-50" (click)="wifi()"></i>  
             }
             @if(bluetoothOn){
                 <i class="fab fa-bluetooth-b" (click)="bluetoothOn = false;"></i>  
@@ -96,9 +102,9 @@
                     <div class="ml-3">
                         <h4 class="m-0">Wifi</h4>
                         @if(wifiOn){
-                        <span class="text-sm">Autonoma</span>
+                        <span class="text-sm" translate>on</span>
                         }@else {
-                        <span class="text-sm">Desactivado</span>
+                        <span class="text-sm" translate>off</span>
                         }
                     </div>
                 </div>
@@ -110,9 +116,9 @@
                     <div class="ml-3">
                         <h4 class="m-0">Bluetooth</h4>
                         @if(bluetoothOn){
-                        <span class="text-sm">Activado</span>
+                        <span class="text-sm" translate>on</span>
                         }@else {
-                        <span class="text-sm">Apagado</span>
+                        <span class="text-sm" translate>off</span>
                         }
 
                     </div>
@@ -124,9 +130,9 @@
                     <div class="ml-3">
                         <h4 class="m-0">AirDrop</h4>
                         @if(airdropOn){
-                        <span class="text-sm">Todos</span>
+                        <span class="text-sm" translate>on</span>
                         }@else {
-                        <span class="text-sm">Nadie</span>
+                        <span class="text-sm" translate>off</span>
                         }
                     </div>
                 </div>
@@ -174,7 +180,7 @@
         <div class="col-12">
             <div class="grid glass-container">
                 <div class="col-12 py-0">
-                    <b>Pantalla</b>
+                    <b translate>brightness</b>
                 </div>
                 <div class="col-12 flex align-items-center relative">
                     <p-slider [min]="10" [max]="100" class="w-full" [style]="{'width': '100%'}"
@@ -185,7 +191,7 @@
         <div class="col-12">
             <div class="grid glass-container">
                 <div class="col-12 py-0">
-                    <b>Sonido</b>
+                    <b translate>sound</b>
                 </div>
                 <div class="col-12 flex align-items-center">
                     <p-slider class="w-full" [style]="{'width': '100%'}" [(ngModel)]="valueSound" (onChange)="setValueVolumen()"></p-slider>

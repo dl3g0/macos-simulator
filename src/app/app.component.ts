@@ -67,6 +67,10 @@ export class AppComponent implements OnInit{
     let theme = localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light';
     localStorage.setItem('theme', theme);
     this.globalService.switchTheme(theme);
+
+    let lang = localStorage.getItem('lang') ? localStorage.getItem('lang') : 'es';
+    localStorage.setItem('lang', lang);
+    this.globalService.changeLanguage(lang);
   }
 
   listenToGamepad() {

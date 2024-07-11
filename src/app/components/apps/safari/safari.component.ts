@@ -8,7 +8,7 @@ import { GlobalService } from '../../../services/global.service';
 export class SafariComponent {
   @Output() close = new EventEmitter<Object>();
   displaySafari = true;
-  wifiOn = false;
+  wifiOn = true;
 
   constructor(private globalService: GlobalService){
     this.globalService.request.subscribe((res) => {

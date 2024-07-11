@@ -14,7 +14,7 @@ import {DialogModule} from 'primeng/dialog';
 // import {ChipsModule} from 'primeng/chips';
 // import {DropdownModule} from 'primeng/dropdown';
 // import {InputMaskModule} from 'primeng/inputmask';
-// import {InputSwitchModule} from 'primeng/inputswitch';
+import {InputSwitchModule} from 'primeng/inputswitch';
 // import {InputTextareaModule} from 'primeng/inputtextarea';
 // import {InputNumberModule} from 'primeng/inputnumber';
 // import {KnobModule} from 'primeng/knob';
@@ -92,7 +92,7 @@ import { TerminalModule } from 'primeng/terminal';
     // ChipsModule,
     // DropdownModule,
     // InputMaskModule,
-    // InputSwitchModule,
+    InputSwitchModule,
     // InputTextareaModule,
     // InputNumberModule,
     // KnobModule,
@@ -167,7 +167,7 @@ import { TerminalModule } from 'primeng/terminal';
     // ChipsModule,
     // DropdownModule,
     // InputMaskModule,
-    // InputSwitchModule,
+    InputSwitchModule,
     // InputTextareaModule,
     // InputNumberModule,
     // KnobModule,

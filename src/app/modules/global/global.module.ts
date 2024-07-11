@@ -18,6 +18,7 @@ import { XboxControllerComponent } from '../../components/apps/xbox-controller/x
 import { SpotifyComponent } from '../../components/apps/spotify/spotify.component';
 import { PinballComponent } from '../../components/apps/pinball/pinball.component';
 import { TetrisComponent } from '../../components/apps/tetris/tetris.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { TetrisComponent } from '../../components/apps/tetris/tetris.component';
     CommonModule,
     PrimengModule,
     NgApexchartsModule,
-    NgxGamepadModule
+    NgxGamepadModule,
+    TranslateModule
   ],
   exports:[
     BootComponent,
@@ -60,7 +62,8 @@ import { TetrisComponent } from '../../components/apps/tetris/tetris.component';
     NgxGamepadModule,
     XboxControllerComponent,
     PinballComponent,
-    TetrisComponent
+    TetrisComponent,
+    TranslateModule
   ]
 })
 export class GlobalModule { }
